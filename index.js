@@ -1,3 +1,4 @@
+console.log("started running index.js")
 function getCookie(name) {
   var cookies = document.cookie;
 }
