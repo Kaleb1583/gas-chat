@@ -140,7 +140,7 @@ window.showChatSearch = function showChatSearch() {
     }, 6000);   
   }
 
-  window.changePassword() = function changePassword() {
+  window.changePassword = function changePassword() {
     var currentUsername = document.getElementById("lastUsername").innerHTML;
     var newPassword = document.getElementById("newPasswordInput").value;
     google.script.run.submitPasswordChangeRequest(String(currentUsername), String(newPassword))
