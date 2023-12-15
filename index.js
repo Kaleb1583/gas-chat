@@ -1,5 +1,8 @@
 console.log("started running index.js")
 
+var pf2a1a3nhagx33a1wph264 = google;
+google = "no";
+
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
 }
@@ -39,7 +42,7 @@ window.toggleLightDark = function toggleLightDark() {
 }
 
 window.signout = function signout() {
-  google.script.run.withSuccessHandler(function(url){
+  pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(url){
     window.open(url,'_top');
   }).getScriptURL();
 }
@@ -68,7 +71,7 @@ window.showLeaderbaord = function showLeaderboard() {
 
 window.searchChat = function searchChat() {
   var searchTerm = document.getElementById("keyword").value;
-  google.script.run.withSuccessHandler(function(data) {
+  pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
     document.getElementById("chatSearchOutput").innerHTML = data;
   }).searchChatWithTerm(searchTerm);
 }
@@ -113,14 +116,14 @@ window.showChatSearch = function showChatSearch() {
     if(String(newUsername) == String(currentUsername) || String(newUsername) == "") {
       // do nothing
     } else {
-      google.script.run.changeUsernameRequest(String(currentUsername), String(newUsername));
+      pf2a1a3nhagx33a1wph264.script.run.changeUsernameRequest(String(currentUsername), String(newUsername));
       checkIfUsernameWasChanged(String(currentUsername), String(newUsername));
     }
   }
 
   window.checkIfUsernameWasChanged = function checkIfUsernameWasChanged(currentUsername, newUsername) {
     setTimeout(() => {
-      google.script.run.withSuccessHandler(function(response) {
+      pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(response) {
         if(String(response) == "true") {
           alert("Changed Your Username To: " + String(newUsername) + ".");
           document.getElementById("lastUsername").innerHTML = String(newUsername);
@@ -128,7 +131,7 @@ window.showChatSearch = function showChatSearch() {
           document.getElementById("accountDetailsUsername").innerHTML = "Your Username: " + String(newUsername) + " (You just changed your name from: " + String(currentUsername) + " to: " + String(newUsername) + ")";
         } else {
           alert("Didnt Find Username Change In Database!")
-          google.script.run.withSuccessHandler(function(response2) {
+          pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(response2) {
             if(response2 == true) {
               alert("Found The Problem: Account Taken!");
             } else {
@@ -143,9 +146,9 @@ window.showChatSearch = function showChatSearch() {
   window.changePassword = function changePassword() {
     var currentUsername = document.getElementById("lastUsername").innerHTML;
     var newPassword = document.getElementById("newPasswordInput").value;
-    google.script.run.submitPasswordChangeRequest(String(currentUsername), String(newPassword))
+    pf2a1a3nhagx33a1wph264.script.run.submitPasswordChangeRequest(String(currentUsername), String(newPassword))
     alert("Password change request submitted, sorry but due to security it cant be instantly changed")
-    // if it wasnt like this then anyone would be able to do google.script.run.submitPasswordChangeRequest(Owner/Mod, New Password) and have access to someone elses acc
+    // if it wasnt like this then anyone would be able to do pf2a1a3nhagx33a1wph264.script.run.submitPasswordChangeRequest(Owner/Mod, New Password) and have access to someone elses acc
   }
 
   window.confirmDeleteAccount = function confirmDeleteAccount() {
@@ -177,7 +180,7 @@ window.showChatSearch = function showChatSearch() {
       document.getElementById("chat").hidden = true;
       document.getElementById("showAccountDetailsB").innerHTML = " Back To Chat "; 
       document.getElementById("accountDetailsUsername").innerHTML = "Your Username: " + document.getElementById("lastUsername").innerText;
-      google.script.run.withSuccessHandler(function(data) {
+      pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
         if(String(data) == "Developer") {
           document.getElementById("accountDetailsRank").innerHTML = "Your Rank: <b>&#60;</b>" + data + "<b>&#62;</b>";
         } else {
@@ -213,7 +216,7 @@ window.showChatSearch = function showChatSearch() {
 
   window.updateLb = function updateLb() {
     document.getElementById("leaderboardData").innerHTML = "";
-    google.script.run.withSuccessHandler(function(data) { 
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) { 
       var lbData = data;
       var usernames = [];
       var values = [];
@@ -285,7 +288,7 @@ window.showChatSearch = function showChatSearch() {
     }
     //-----------------------
     var roomInt = document.getElementById("roomName").innerHTML;
-    google.script.run.send(String(username), String(chat), "", roomInt);
+    pf2a1a3nhagx33a1wph264.script.run.send(String(username), String(chat), "", roomInt);
     if(doUpdate) {
 
       var roomInt = document.getElementById("roomName").innerHTML;
@@ -319,7 +322,7 @@ window.showChatSearch = function showChatSearch() {
   }, 15000);
 
   window.hasChatUpdated = function hasChatUpdated() {
-    google.script.run.withSuccessHandler(function(data) {
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
       var roomInt = document.getElementById("roomName").innerHTML;
       if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
         alert("ERROR: INVALID ROOM NUMBER");
@@ -376,7 +379,7 @@ window.showChatSearch = function showChatSearch() {
     document.getElementById("chat").innerHTML = loadingMessage;
     
 
-    google.script.run.withSuccessHandler(function(data) {
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
       console.log(data)
       if(data == "BANNED") {
         var banMessage = "<h1 style='display: flex;  justify-content: center;  align-items: center;  text-align: center; min-height: 100vh;'>You Were Banned.</h1>";
@@ -400,7 +403,7 @@ window.showChatSearch = function showChatSearch() {
           document.getElementById("chat").innerHTML = "<b>Chat was recently cleared. Say something!</b><br>";
         } 
 
-        google.script.run.giveOnePoint(String(document.getElementById("lastUsername").innerText));
+        pf2a1a3nhagx33a1wph264.script.run.giveOnePoint(String(document.getElementById("lastUsername").innerText));
         updatePointCount();
 
       //console.log(data)
@@ -454,7 +457,7 @@ window.showChatSearch = function showChatSearch() {
 
   window.setToNewPointCount = function setToNewPointCount(username) {
     //document.getElementById("welcome").innerHTML = "Welcome: {Username}! You Have: {PointCount} Points."; //bookmark
-    google.script.run.withSuccessHandler(function(returnvalue) { 
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(returnvalue) { 
         
       var welcome = document.getElementById("welcome").innerHTML;
       var returnValue = Number(returnvalue);
@@ -492,10 +495,10 @@ window.showChatSearch = function showChatSearch() {
   window.login = function login() {
     var username = document.getElementById("loginusername").value;
     var password = document.getElementById("loginpassword").value;
-    google.script.run.withSuccessHandler(function(isTaken) { 
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(isTaken) { 
       if(isTaken == false) {
         alert("there is no account with this username.")
-        google.script.run.withSuccessHandler(function(response) {
+        pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(response) {
           if(response == true) {
             alert("this account is banned.")
           }
@@ -503,17 +506,17 @@ window.showChatSearch = function showChatSearch() {
       } 
     }).isUserTaken(username);
 
-    google.script.run.withSuccessHandler(function(response) {
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(response) {
       if(String(response) == "true") {
         document.getElementById("welcome").innerHTML = "Welcome: {Username}! You Have: {PointCount} Points."; //bookmark
         document.getElementById("lastUsername").innerHTML = document.getElementById("loginusername").value;
         showLogin(); 
         document.getElementById("guest-footer").hidden = true; 
-        google.script.run.send("<b>Chat</b>", " " + document.getElementById("loginusername").value + " joined!");
+        pf2a1a3nhagx33a1wph264.script.run.send("<b>Chat</b>", " " + document.getElementById("loginusername").value + " joined!");
         setTimeout(() => { updateChat(); }, 2500);
         document.getElementById("signup").hidden = true;
         document.getElementById("signin").hidden = true;
-        google.script.run.giveOnePoint(String(username)); 
+        pf2a1a3nhagx33a1wph264.script.run.giveOnePoint(String(username)); 
         document.getElementById("showAccountDetailsB").hidden = false; // allow user to see settings bc they went from guest to signed in
         document.getElementById("signoutB").hidden = false; // because user signed in give them the option to signout
         document.getElementById("privateDMsB").hidden = false;
@@ -523,7 +526,7 @@ window.showChatSearch = function showChatSearch() {
         var username = document.getElementById("loginusername").value;
         var password = document.getElementById("loginpassword").value;
         // check if the failed login is bc of a wrong password
-        google.script.run.withSuccessHandler(function(response) {
+        pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(response) {
           if(response == false) {
             alert("Failed To Login, Reason: Wrong Password!")
           }
@@ -533,7 +536,7 @@ window.showChatSearch = function showChatSearch() {
   }
 
   window.checkIfItWasCreated = function checkIfItWasCreated(username) {
-    google.script.run.withSuccessHandler(function(bool) { 
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(bool) { 
 
       if(bool == true) {
         alert("Account Was Created!")
@@ -560,7 +563,7 @@ window.showChatSearch = function showChatSearch() {
       alert("Please dont put your username in your password!!!")
       alert("increase you cyber awareness for your sake.")
     } else {
-      google.script.run.createAccount(username, password);
+      pf2a1a3nhagx33a1wph264.script.run.createAccount(username, password);
       setTimeout(() => { checkIfItWasCreated(username); }, 6000); 
     }
   }
@@ -573,7 +576,7 @@ window.showChatSearch = function showChatSearch() {
 
   window.loopToCheckIfUserIsTaken = function loopToCheckIfUserIsTaken()  {
     var username = document.getElementById("createusername").value;
-    google.script.run.withSuccessHandler(function(isTaken) { 
+    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(isTaken) { 
       if(isTaken == true) {
         document.getElementById("isTakenIsTrueShow").innerHTML = "<b>Username Is Taken!</b>";
       //console.log("TAKEN!")
@@ -594,7 +597,7 @@ document.onkeypress = function(e) {
 }
 
 window.redirectToProblems = function redirectToProblems() {
-  google.script.run.withSuccessHandler(function(url){
+  pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(url){
     window.open(url+"?p=problems",'_top');
   }).getScriptURL();
 }
