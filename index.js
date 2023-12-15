@@ -310,6 +310,12 @@ function showChatSearch() {
     // append h1 to start of body instead of body html + "chat......"
   }
 
+  setInterval(function(){ 
+    if(document.getElementById("second-main-container").hidden == false) {
+      hasChatUpdated();
+    }
+  }, 15000);
+
   function hasChatUpdated() {
     google.script.run.withSuccessHandler(function(data) {
       var roomInt = document.getElementById("roomName").innerHTML;
