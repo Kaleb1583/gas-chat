@@ -1,16 +1,16 @@
 console.log("started running index.js")
-function getCookie(name) {
+function window.getCookie(name) {
   var cookies = document.cookie;
 }
-function setCookie(name, value) {
+function window.setCookie(name, value) {
   document.cookie = String(name) + "=" + String(value)+ "; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 }
 
-function deleteCookie(cookie) {
+function window.deleteCookie(cookie) {
   document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
-function showPrivateChats() {
+function window.showPrivateChats() {
   var beforeChange = document.getElementById("privateChats").hidden;
   document.getElementById("privateChats").hidden = !document.getElementById("privateChats").hidden;
   if(beforeChange == true) {
@@ -31,19 +31,19 @@ function showPrivateChats() {
   }
 }
 
-function toggleLightDark() {
+function window.toggleLightDark() {
   var body = document.body;
   body.classList.toggle("dark-mode");
   
 }
 
-function signout() {
+function window.signout() {
   google.script.run.withSuccessHandler(function(url){
     window.open(url,'_top');
   }).getScriptURL();
 }
 
-function showLeaderboard() {
+function window.showLeaderboard() {
 
   if(document.getElementById("leaderboardDiv").hidden == true) {
     document.getElementById("lbb").innerHTML = "Close Point Leaderboard";
@@ -65,14 +65,14 @@ function showLeaderboard() {
   updateLb();
 }
 
-function searchChat() {
+function window.searchChat() {
   var searchTerm = document.getElementById("keyword").value;
   google.script.run.withSuccessHandler(function(data) {
     document.getElementById("chatSearchOutput").innerHTML = data;
   }).searchChatWithTerm(searchTerm);
 }
 
-function showChatSearch() {
+function window.showChatSearch() {
 
   var before = document.getElementById("chatSearchDiv").hidden;
   document.getElementById("chatSearchDiv").hidden = !before;
@@ -95,17 +95,17 @@ function showChatSearch() {
   document.getElementById("leaderboardDiv").hidden = true;
 }
 
-  function showUsernameChanger() {
+  function window.showUsernameChanger() {
     document.getElementById("newUsernameInput").hidden = !document.getElementById("newUsernameInput").hidden;
     document.getElementById("submitNewUsernameB").hidden = !document.getElementById("submitNewUsernameB").hidden;
   }
 
-  function showPasswordChanger() {
+  function window.showPasswordChanger() {
     document.getElementById("newPasswordInput").hidden = !document.getElementById("newPasswordInput").hidden;
     document.getElementById("submitNewPasswordB").hidden = !document.getElementById("submitNewPasswordB").hidden;
   }
 
-  function changeUsername() {
+  function window.changeUsername() {
     document.getElementById("submitNewUsernameB").hidden = true;
     var currentUsername = document.getElementById("lastUsername").innerHTML;
     var newUsername = document.getElementById("newUsernameInput").value;
@@ -117,7 +117,7 @@ function showChatSearch() {
     }
   }
 
-  function checkIfUsernameWasChanged(currentUsername, newUsername) {
+  function window.checkIfUsernameWasChanged(currentUsername, newUsername) {
     setTimeout(() => {
       google.script.run.withSuccessHandler(function(response) {
         if(String(response) == "true") {
@@ -139,18 +139,18 @@ function showChatSearch() {
     }, 6000);   
   }
 
-  function changePassword() {
+  function window.changePassword() {
     var currentUsername = document.getElementById("lastUsername").innerHTML;
     var newPassword = document.getElementById("newPasswordInput").value;
     google.script.run.submitPasswordChangeRequest(String(currentUsername), String(newPassword))
     alert("Password change request submitted, sorry but due to security it cant be instantly changed")
   }
 
-  function confirmDeleteAccount() {
+  function window.confirmDeleteAccount() {
     document.getElementById("deleteAccountConfirmation").hidden = false;
   }
 
-  function requestAccountDeletion() {
+  function window.requestAccountDeletion() {
     if (confirm('Sorry, Second Confirmation Just In Case. Are you sure?')) {
       alert("Requesting Account Deletion...");
       requestAccountDeletion(document.getElementById("lastUsername"));
@@ -161,7 +161,7 @@ function showChatSearch() {
     }
   }
 
-  function showAccountDetails() {
+  function window.showAccountDetails() {
     document.getElementById("accountDetailsUsername").innerHTML = "Your Username: &#123;Username&#125;";
     document.getElementById("accountDetailsRank").innerHTML = "Your Rank: &#123;UserRank&#125;";
 
@@ -188,17 +188,17 @@ function showChatSearch() {
 
   var blockDT = true;
   if(blockDT == true) {
-    window.oncontextmenu = function () {
+    window.oncontextmenu = function window.() {
     return false;
     }
-    document.onkeydown = function (e) { 
+    document.onkeydown = function window.(e) { 
       if (window.event.keyCode == 123 ||  e.button==2) { 
         return false;
       }
     }
   }
 
-  function deleteElementsById(id) {
+  function window.deleteElementsById(id) {
     var allElements = document.querySelectorAll('[id^="' + id + '"]');
     //console.log(allElements)
     //console.log(allElements)
@@ -209,7 +209,7 @@ function showChatSearch() {
     }
   }
 
-  function updateLb() {
+  function window.updateLb() {
     document.getElementById("leaderboardData").innerHTML = "";
     google.script.run.withSuccessHandler(function(data) { 
       var lbData = data;
@@ -233,7 +233,7 @@ function showChatSearch() {
   }
 
 
-  function setRoom(roomInt) {
+  function window.setRoom(roomInt) {
     
     //document.getElementById("dropdowncontent").style.display = "none";
 
@@ -260,7 +260,7 @@ function showChatSearch() {
 
   //.
 
-  function onbuttonclick() { // send chat
+  function window.onbuttonclick() { // send chat
     document.getElementById("sendButton").hidden = true; 
     var username = document.getElementById("lastUsername").innerHTML;
     var chat = document.getElementById("input").value;
@@ -301,7 +301,7 @@ function showChatSearch() {
     }
   }
   
-  function hideAllBesidesChat() {
+  function window.hideAllBesidesChat() {
     document.getElementById("buttons").hidden = true;
     document.getElementById("first-main-container").hidden = true;
     document.getElementById("send").hidden = true;
@@ -316,7 +316,7 @@ function showChatSearch() {
     }
   }, 15000);
 
-  function hasChatUpdated() {
+  function window.hasChatUpdated() {
     google.script.run.withSuccessHandler(function(data) {
       var roomInt = document.getElementById("roomName").innerHTML;
       if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
@@ -349,7 +349,7 @@ function showChatSearch() {
     }
   }
 
-  function updateChat() { // update chat
+  function window.updateChat() { // update chat
     document.getElementById("chatOutdated").innerText = "";
 
     var user = document.getElementById("lastUsername").innerText;
@@ -415,7 +415,7 @@ function showChatSearch() {
 
   updateChat(); 
 
-  function showCreateAccount() {
+  function window.showCreateAccount() {
     document.getElementById("welcome").hidden = !document.getElementById("welcome").hidden;
     //document.getElementById("chatSearchDiv").hidden = !document.getElementById("chatSearchDiv").hidden;
     if(document.getElementById("createAccountForm").hidden == false) {
@@ -433,7 +433,7 @@ function showChatSearch() {
     }
   }
 
-  function showLogin() { 
+  function window.showLogin() { 
     document.getElementById("welcome").hidden = !document.getElementById("welcome").hidden;
     if(document.getElementById("signinForm").hidden == false) {
       document.getElementById("signinForm").hidden = true;
@@ -450,7 +450,7 @@ function showChatSearch() {
     }
   }
 
-  function setToNewPointCount(username) {
+  function window.setToNewPointCount(username) {
     //document.getElementById("welcome").innerHTML = "Welcome: {Username}! You Have: {PointCount} Points."; //bookmark
     google.script.run.withSuccessHandler(function(returnvalue) { 
         
@@ -463,13 +463,13 @@ function showChatSearch() {
     }).getPointCount(String(username));
   }
 
-  function updatePointCount() {
+  function window.updatePointCount() {
     var username = document.getElementById("lastUsername").innerHTML;
     setToNewPointCount(String(username));
     setTimeout(() => { updatePointCount(); }, 60000); 
   }
 
-  function refresh() {
+  function window.refresh() {
     console.clear();
 
     const style = [
@@ -487,7 +487,7 @@ function showChatSearch() {
   }
   //refresh();
 
-  function login() {
+  function window.login() {
     var username = document.getElementById("loginusername").value;
     var password = document.getElementById("loginpassword").value;
     google.script.run.withSuccessHandler(function(isTaken) { 
@@ -530,7 +530,7 @@ function showChatSearch() {
     }).trylogin(username, password);
   }
 
-  function checkIfItWasCreated(username) {
+  function window.checkIfItWasCreated(username) {
     google.script.run.withSuccessHandler(function(bool) { 
 
       if(bool == true) {
@@ -551,7 +551,7 @@ function showChatSearch() {
     }).checkIfAccountWasCreated(username);
   }
 
-  function createAccount() {
+  function window.createAccount() {
     var username = document.getElementById("createusername").value;
     var password = document.getElementById("createpassword").value;
     if(String(password).includes(String(username))) {
@@ -569,7 +569,7 @@ function showChatSearch() {
     }
   }, 5000);
 
-  function loopToCheckIfUserIsTaken()  {
+  function window.loopToCheckIfUserIsTaken()  {
     var username = document.getElementById("createusername").value;
     google.script.run.withSuccessHandler(function(isTaken) { 
       if(isTaken == true) {
@@ -591,7 +591,7 @@ document.onkeypress = function(e) {
   }
 }
 
-function redirectToProblems() {
+function window.redirectToProblems() {
   google.script.run.withSuccessHandler(function(url){
     window.open(url+"?p=problems",'_top');
   }).getScriptURL();
