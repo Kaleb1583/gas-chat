@@ -1,16 +1,16 @@
 console.log("started running index.js")
-function window.getCookie(name) {
+window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
 }
-function window.setCookie(name, value) {
+window.setCookie = function setCookie(name, value) {
   document.cookie = String(name) + "=" + String(value)+ "; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 }
 
-function window.deleteCookie(cookie) {
+function deleteCookie(cookie) {
   document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
-function window.showPrivateChats() {
+function showPrivateChats() {
   var beforeChange = document.getElementById("privateChats").hidden;
   document.getElementById("privateChats").hidden = !document.getElementById("privateChats").hidden;
   if(beforeChange == true) {
@@ -31,19 +31,19 @@ function window.showPrivateChats() {
   }
 }
 
-function window.toggleLightDark() {
+function toggleLightDark() {
   var body = document.body;
   body.classList.toggle("dark-mode");
   
 }
 
-function window.signout() {
+function signout() {
   google.script.run.withSuccessHandler(function(url){
     window.open(url,'_top');
   }).getScriptURL();
 }
 
-function window.showLeaderboard() {
+function showLeaderboard() {
 
   if(document.getElementById("leaderboardDiv").hidden == true) {
     document.getElementById("lbb").innerHTML = "Close Point Leaderboard";
@@ -65,14 +65,14 @@ function window.showLeaderboard() {
   updateLb();
 }
 
-function window.searchChat() {
+function searchChat() {
   var searchTerm = document.getElementById("keyword").value;
   google.script.run.withSuccessHandler(function(data) {
     document.getElementById("chatSearchOutput").innerHTML = data;
   }).searchChatWithTerm(searchTerm);
 }
 
-function window.showChatSearch() {
+function showChatSearch() {
 
   var before = document.getElementById("chatSearchDiv").hidden;
   document.getElementById("chatSearchDiv").hidden = !before;
@@ -95,17 +95,17 @@ function window.showChatSearch() {
   document.getElementById("leaderboardDiv").hidden = true;
 }
 
-  function window.showUsernameChanger() {
+  function showUsernameChanger() {
     document.getElementById("newUsernameInput").hidden = !document.getElementById("newUsernameInput").hidden;
     document.getElementById("submitNewUsernameB").hidden = !document.getElementById("submitNewUsernameB").hidden;
   }
 
-  function window.showPasswordChanger() {
+  function showPasswordChanger() {
     document.getElementById("newPasswordInput").hidden = !document.getElementById("newPasswordInput").hidden;
     document.getElementById("submitNewPasswordB").hidden = !document.getElementById("submitNewPasswordB").hidden;
   }
 
-  function window.changeUsername() {
+  function changeUsername() {
     document.getElementById("submitNewUsernameB").hidden = true;
     var currentUsername = document.getElementById("lastUsername").innerHTML;
     var newUsername = document.getElementById("newUsernameInput").value;
@@ -117,7 +117,7 @@ function window.showChatSearch() {
     }
   }
 
-  function window.checkIfUsernameWasChanged(currentUsername, newUsername) {
+  function checkIfUsernameWasChanged(currentUsername, newUsername) {
     setTimeout(() => {
       google.script.run.withSuccessHandler(function(response) {
         if(String(response) == "true") {
@@ -139,18 +139,18 @@ function window.showChatSearch() {
     }, 6000);   
   }
 
-  function window.changePassword() {
+  function changePassword() {
     var currentUsername = document.getElementById("lastUsername").innerHTML;
     var newPassword = document.getElementById("newPasswordInput").value;
     google.script.run.submitPasswordChangeRequest(String(currentUsername), String(newPassword))
     alert("Password change request submitted, sorry but due to security it cant be instantly changed")
   }
 
-  function window.confirmDeleteAccount() {
+  function confirmDeleteAccount() {
     document.getElementById("deleteAccountConfirmation").hidden = false;
   }
 
-  function window.requestAccountDeletion() {
+  function requestAccountDeletion() {
     if (confirm('Sorry, Second Confirmation Just In Case. Are you sure?')) {
       alert("Requesting Account Deletion...");
       requestAccountDeletion(document.getElementById("lastUsername"));
@@ -161,7 +161,7 @@ function window.showChatSearch() {
     }
   }
 
-  function window.showAccountDetails() {
+  function showAccountDetails() {
     document.getElementById("accountDetailsUsername").innerHTML = "Your Username: &#123;Username&#125;";
     document.getElementById("accountDetailsRank").innerHTML = "Your Rank: &#123;UserRank&#125;";
 
@@ -188,17 +188,17 @@ function window.showChatSearch() {
 
   var blockDT = true;
   if(blockDT == true) {
-    window.oncontextmenu = function window.() {
+    window.oncontextmenu = function () {
     return false;
     }
-    document.onkeydown = function window.(e) { 
+    document.onkeydown = function (e) { 
       if (window.event.keyCode == 123 ||  e.button==2) { 
         return false;
       }
     }
   }
 
-  function window.deleteElementsById(id) {
+  function deleteElementsById(id) {
     var allElements = document.querySelectorAll('[id^="' + id + '"]');
     //console.log(allElements)
     //console.log(allElements)
@@ -209,7 +209,7 @@ function window.showChatSearch() {
     }
   }
 
-  function window.updateLb() {
+  function updateLb() {
     document.getElementById("leaderboardData").innerHTML = "";
     google.script.run.withSuccessHandler(function(data) { 
       var lbData = data;
@@ -233,7 +233,7 @@ function window.showChatSearch() {
   }
 
 
-  function window.setRoom(roomInt) {
+  function setRoom(roomInt) {
     
     //document.getElementById("dropdowncontent").style.display = "none";
 
@@ -260,7 +260,7 @@ function window.showChatSearch() {
 
   //.
 
-  function window.onbuttonclick() { // send chat
+  function onbuttonclick() { // send chat
     document.getElementById("sendButton").hidden = true; 
     var username = document.getElementById("lastUsername").innerHTML;
     var chat = document.getElementById("input").value;
@@ -301,7 +301,7 @@ function window.showChatSearch() {
     }
   }
   
-  function window.hideAllBesidesChat() {
+  function hideAllBesidesChat() {
     document.getElementById("buttons").hidden = true;
     document.getElementById("first-main-container").hidden = true;
     document.getElementById("send").hidden = true;
@@ -316,7 +316,7 @@ function window.showChatSearch() {
     }
   }, 15000);
 
-  function window.hasChatUpdated() {
+  function hasChatUpdated() {
     google.script.run.withSuccessHandler(function(data) {
       var roomInt = document.getElementById("roomName").innerHTML;
       if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
@@ -349,7 +349,7 @@ function window.showChatSearch() {
     }
   }
 
-  function window.updateChat() { // update chat
+  window.updateChat = function updateChat() { // update chat
     document.getElementById("chatOutdated").innerText = "";
 
     var user = document.getElementById("lastUsername").innerText;
@@ -415,7 +415,7 @@ function window.showChatSearch() {
 
   updateChat(); 
 
-  function window.showCreateAccount() {
+  function showCreateAccount() {
     document.getElementById("welcome").hidden = !document.getElementById("welcome").hidden;
     //document.getElementById("chatSearchDiv").hidden = !document.getElementById("chatSearchDiv").hidden;
     if(document.getElementById("createAccountForm").hidden == false) {
@@ -433,7 +433,7 @@ function window.showChatSearch() {
     }
   }
 
-  function window.showLogin() { 
+  function showLogin() { 
     document.getElementById("welcome").hidden = !document.getElementById("welcome").hidden;
     if(document.getElementById("signinForm").hidden == false) {
       document.getElementById("signinForm").hidden = true;
@@ -450,7 +450,7 @@ function window.showChatSearch() {
     }
   }
 
-  function window.setToNewPointCount(username) {
+  function setToNewPointCount(username) {
     //document.getElementById("welcome").innerHTML = "Welcome: {Username}! You Have: {PointCount} Points."; //bookmark
     google.script.run.withSuccessHandler(function(returnvalue) { 
         
@@ -463,13 +463,13 @@ function window.showChatSearch() {
     }).getPointCount(String(username));
   }
 
-  function window.updatePointCount() {
+  function updatePointCount() {
     var username = document.getElementById("lastUsername").innerHTML;
     setToNewPointCount(String(username));
     setTimeout(() => { updatePointCount(); }, 60000); 
   }
 
-  function window.refresh() {
+  function refresh() {
     console.clear();
 
     const style = [
@@ -487,7 +487,7 @@ function window.showChatSearch() {
   }
   //refresh();
 
-  function window.login() {
+  function login() {
     var username = document.getElementById("loginusername").value;
     var password = document.getElementById("loginpassword").value;
     google.script.run.withSuccessHandler(function(isTaken) { 
@@ -530,7 +530,7 @@ function window.showChatSearch() {
     }).trylogin(username, password);
   }
 
-  function window.checkIfItWasCreated(username) {
+  function checkIfItWasCreated(username) {
     google.script.run.withSuccessHandler(function(bool) { 
 
       if(bool == true) {
@@ -551,7 +551,7 @@ function window.showChatSearch() {
     }).checkIfAccountWasCreated(username);
   }
 
-  function window.createAccount() {
+  function createAccount() {
     var username = document.getElementById("createusername").value;
     var password = document.getElementById("createpassword").value;
     if(String(password).includes(String(username))) {
@@ -569,7 +569,7 @@ function window.showChatSearch() {
     }
   }, 5000);
 
-  function window.loopToCheckIfUserIsTaken()  {
+  function loopToCheckIfUserIsTaken()  {
     var username = document.getElementById("createusername").value;
     google.script.run.withSuccessHandler(function(isTaken) { 
       if(isTaken == true) {
@@ -591,7 +591,7 @@ document.onkeypress = function(e) {
   }
 }
 
-function window.redirectToProblems() {
+function redirectToProblems() {
   google.script.run.withSuccessHandler(function(url){
     window.open(url+"?p=problems",'_top');
   }).getScriptURL();
