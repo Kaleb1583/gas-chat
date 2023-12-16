@@ -15,7 +15,7 @@ window.deleteCookie = function deleteCookie(cookie) {
   document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
-window.toggleVisibility = function toggleVisibility() {
+window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
 }
 
@@ -28,11 +28,13 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   //console.log("Chat Data: " + data)
   var id = String(chatName).replace(" ", "");
   var divName = "PrivateChatData" + chatNumber;
-  var privateChatName = "<div><h3 onclick='toggleVisibility(" + String(id) + ")'> " + String(chatName) +  "</h3></div>";
-  document.getElementById(divName).append(privateChatName);
+  var chatNameLine = window.document.createElement("div");
+  var privateChatName = "<div><h3 onclick='toggleVisibility(`" + String(id) + "`)'> " + String(chatName) +  "</h3></div>";
+  chatNameLine.innerHTML = privateChatName;
+  document.getElementById(divName).appendChild(privateChatName);
   var chats = Array(data.split(","));
   for(j=0; j < chats.length; j++) {
-    console.log(chats[j])
+    console.log(chats)
     //document.getElementById(id).append(String(chats[j]));
   }
   
