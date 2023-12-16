@@ -6,6 +6,7 @@ google = "";
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
 }
+
 window.setCookie = function setCookie(name, value) {
   document.cookie = String(name) + "=" + String(value)+ "; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 }
@@ -22,7 +23,16 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   console.log("Chat Name: " + chatName)
   console.log("Chat Data: " + data)
   var privateChatDataHolder = document.createElement("div");
-  var privateChatName = "<h3> " + chatName + "</h3>";
+  var privateChatName = "<div><h3 onclick='show" + chatName.replace(" ", "") + "()'> " + String(chatName) + " </h3><div id='" + String(chatName) + "'></div></div>";
+  var functionName = "show"+String(chatName).replace(" ", "");
+  var chats = data.split(",");
+  for(j=0; j < chats.length; j++) {
+    var newChatLine = document.createElement("p").innerHTML = chats[j];
+    document.getElementById(String(chatName)).append(newChatLine);
+  }
+  function functionName() {
+    document.getElementById(String(chatName)).hidden = !document.getElementById(String(chatName)).hidden;
+  }
   privateChatDataHolder.innerHTML = privateChatName;
   document.getElementById("privateChats").append(privateChatDataHolder);
   
