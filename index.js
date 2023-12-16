@@ -1,4 +1,4 @@
-console.log("started: index.js")
+//console.log("Runned Essential External JS Functions")
 
 var pf2a1a3nhagx33a1wph264 = google;
 
@@ -28,10 +28,9 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   //console.log("Chat Data: " + data)
   var id = String(chatName).replace(" ", "");
   var divName = "PrivateChatData" + chatNumber;
-  var chatNameLine = window.document.createElement("div");
-  var privateChatName = "<div><h3 onclick='toggleVisibility(`" + String(id) + "`)'> " + String(chatName) +  "</h3></div>";
-  chatNameLine.innerHTML = privateChatName;
-  document.getElementById(divName).appendChild(privateChatName);
+  var chatLine = document.createElement("p");
+  chatLine.innerHTML = "<div><h3 onclick='toggleVisibility(`" + String(id) + "`)'> " + String(chatName) +  "</h3></div>";
+  document.getElementById(divName).appendChild(privateChatName);  
   var chats = Array(data.split(","));
   for(j=0; j < chats.length; j++) {
     console.log(chats)
