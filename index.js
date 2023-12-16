@@ -15,23 +15,24 @@ window.deleteCookie = function deleteCookie(cookie) {
   document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+window.toggleVisibility = function toggleVisibility() {
+  document.getElementById(id).hidden = !document.getElementById(id).hidden;
+}
+
 window.createPrivateChatElement = function createPrivateChatElement(chatName, data) {
 
   if( String(document.getElementById("PrivateChatCount").innerHTML).includes("Your") ) {} else {
     document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
   }
-  console.log("Chat Name: " + chatName)
-  console.log("Chat Data: " + data)
+  //console.log("Chat Name: " + chatName)
+  //console.log("Chat Data: " + data)
   var privateChatDataHolder = document.createElement("div");
   var id = String(chatName).replace(" ", "")
   var privateChatName = "<div><h3 onclick='toggleVisibility(" + String(id) + ")> " + String(chatName) +  "</h3></div>";
-  var chats = data.split(",");
+  var chats = Array(data.split(","));
   for(j=0; j < chats.length; j++) {
     console.log(chats[j])
     //document.getElementById(id).append(String(chats[j]));
-  }
-  function toggleVisibility() {
-    document.getElementById(id).hidden = !document.getElementById(id).hidden;
   }
   
 }
@@ -78,7 +79,7 @@ window.updatePrivateChats = function updatePrivateChats() {
           for(w=0; w < selectedChats.length; w++) {
             document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
             if(w==0) {
-              createPrivateChatElement(selectedChats[w], selectedChats[(w+1)])
+              createPrivateChatElement(selectedChats[w], selectedChats[(w+1)], privateChatNumber)
             }
           }
         }).getCertainPrivateChat(data[t]);
