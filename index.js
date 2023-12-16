@@ -1,7 +1,7 @@
 console.log("started running index.js")
 
-var pf2a1a3nhagx33a1wph264 = pf2a1a3nhagx33a1wph264;
-pf2a1a3nhagx33a1wph264 = "";
+var pf2a1a3nhagx33a1wph264 = google;
+google = "";
 
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
