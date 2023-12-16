@@ -113,7 +113,7 @@ window.signout = function signout() {
   }).getScriptURL();
 }
 
-window.showLeaderbaord = function showLeaderboard() {
+window.showLeaderboard = function showLeaderboard() {
 
   if(document.getElementById("leaderboardDiv").hidden == true) {
     document.getElementById("lbb").innerHTML = "Close Point Leaderboard";
