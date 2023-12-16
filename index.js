@@ -1,7 +1,7 @@
-console.log("started running index.js")
+console.log("started: index.js")
 
 var pf2a1a3nhagx33a1wph264 = google;
-google = "";
+
 
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
@@ -17,24 +17,22 @@ window.deleteCookie = function deleteCookie(cookie) {
 
 window.createPrivateChatElement = function createPrivateChatElement(chatName, data) {
 
-  if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {} else {
+  if( String(document.getElementById("PrivateChatCount").innerHTML).includes("Your") ) {} else {
     document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
   }
   console.log("Chat Name: " + chatName)
   console.log("Chat Data: " + data)
   var privateChatDataHolder = document.createElement("div");
-  var privateChatName = "<div><h3 onclick='show" + chatName.replace(" ", "") + "()'> " + String(chatName) + " </h3><div id='" + String(chatName) + "'></div></div>";
-  var functionName = "show"+String(chatName).replace(" ", "");
+  var id = String(chatName).replace(" ", "")
+  var privateChatName = "<div><h3 onclick='toggleVisibility(" + String(id) + ")> " + String(chatName) +  "</h3></div>";
   var chats = data.split(",");
   for(j=0; j < chats.length; j++) {
-    var newChatLine = document.createElement("p").innerHTML = chats[j];
-    document.getElementById(String(chatName)).append(newChatLine);
+    console.log(chats[j])
+    //document.getElementById(id).append(String(chats[j]));
   }
-  function functionName() {
-    document.getElementById(String(chatName)).hidden = !document.getElementById(String(chatName)).hidden;
+  function toggleVisibility() {
+    document.getElementById(id).hidden = !document.getElementById(id).hidden;
   }
-  privateChatDataHolder.innerHTML = privateChatName;
-  document.getElementById("privateChats").append(privateChatDataHolder);
   
 }
 
@@ -661,23 +659,15 @@ window.showChatSearch = function showChatSearch() {
     }).isUserTaken(String(username));
   }
 
-document.onkeypress = function(e) {
-  e = e || window.event;
-  if (e.key == "Enter") {
-    var chat = document.getElementById("input").value;
-    if(chat != "") { // if chat IS NOT ""  (!=  ===  is not)
-      if(document.getElementById("sendButton").hidden = false) {  
-        onbuttonclick(); 
-      }
-    } 
-  }
-}
 
 window.redirectToProblems = function redirectToProblems() {
   pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(url){
     window.open(url+"?p=problems",'_top');
   }).getScriptURL();
 }
+
+
+google = "";
 
 document.getElementById("getJSDiv").remove();
 // ^ hide evidence of this exsisting which kinda hides it which then decreases the abillity for the code to be found and used maliciously
