@@ -416,7 +416,7 @@ window.showChatSearch = function showChatSearch() {
       for(i=0; i < data.length; i++) {
         document.getElementById("chatUpdateCheck").innerHTML = document.getElementById("chatUpdateCheck").innerHTML + data[i] + "<br>"; 
       }
-      console.log(document.getElementById("roomName").innerHTML)
+      //console.log(document.getElementById("roomName").innerHTML)
     }).getChats("UpdateChat", document.getElementById("roomName").innerHTML);
 
     var currentChat = document.getElementById("chat").innerHTML;
@@ -445,8 +445,8 @@ window.showChatSearch = function showChatSearch() {
       document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
     }
 
-    console.log(user)
-    console.log(selectedRoomNumber)
+    //console.log(user)
+    //console.log(selectedRoomNumber)
     var randomMessages = ["Chat Made with: .gs & .html & .js By: Kaleb1583"];
 
     var randomInt = Math.floor(Math.random() * randomMessages.length);
@@ -459,7 +459,7 @@ window.showChatSearch = function showChatSearch() {
     
 
     pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
-      console.log(data)
+      //console.log(data)
       if(data == "BANNED") {
         var banMessage = "<h1 style='display: flex;  justify-content: center;  align-items: center;  text-align: center; min-height: 100vh;'>You Were Banned.</h1>";
         var username = document.getElementById("lastUsername").innerText;
