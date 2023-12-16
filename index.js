@@ -1,7 +1,7 @@
 console.log("started running index.js")
 
-var pf2a1a3nhagx33a1wph264 = google;
-google = "no";
+var pf2a1a3nhagx33a1wph264 = pf2a1a3nhagx33a1wph264;
+pf2a1a3nhagx33a1wph264 = "";
 
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
@@ -14,6 +14,74 @@ window.deleteCookie = function deleteCookie(cookie) {
   document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+window.createPrivateChatElement = function createPrivateChatElement(chatName, data) {
+
+  if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {} else {
+    document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
+  }
+  console.log("Chat Name: " + chatName)
+  console.log("Chat Data: " + data)
+  var privateChatDataHolder = document.createElement("div");
+  var privateChatName = "<h3> " + chatName + "</h3>";
+  privateChatDataHolder.innerHTML = privateChatName;
+  document.getElementById("privateChats").append(privateChatDataHolder);
+  
+}
+
+window.updatePrivateChats() = function updatePrivateChats() {
+  //console.clear();
+  document.getElementById("privateChats").innerHTML = "Click The Chat Name To View";
+  
+  
+  if(document.getElementById("PrivateChatCount") == null) {    
+    var count = document.createElement("p");
+    count.id = "PrivateChatCount";
+    document.body.append(count);
+  } else {
+    document.getElementById("PrivateChatCount").remove();
+    var count = document.createElement("p");
+    count.id = "PrivateChatCount";
+    document.body.append(count);
+  }
+
+  pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
+
+      document.getElementById("privateChats").innerHTML = "<br>";
+      document.getElementById("privateChats").hidden = false;
+      var count = document.createElement("p");
+      count.id = "PrivateChatCount";
+      count.hidden = true;
+      var u = [];
+      for(t=0; t < data.length; t++) {
+        document.getElementById("PrivateChatCount").innerHTML = Number(document.getElementById("PrivateChatCount").innerHTML) + 1;
+        var privateChatNumber = document.getElementById("PrivateChatCount").innerHTML;
+        var id = data[t];
+        var newPrivateChatDataElement = document.createElement("div");
+        newPrivateChatDataElement.id = "PrivateChatData" + privateChatNumber;
+        document.getElementById("privateChats").append(newPrivateChatDataElement);
+        pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
+          var selectedChats = chat.split(",");
+          var certainPrivateChatChatCount = document.createElement("p");
+          certainPrivateChatChatCount.id = "PrivateChatChatCount";
+          certainPrivateChatChatCount.innerHTML = "0";
+          certainPrivateChatChatCount.hidden = true;
+          document.body.append(certainPrivateChatChatCount);
+          for(w=0; w < selectedChats.length; w++) {
+            document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
+            if(w==0) {
+              createPrivateChatElement(selectedChats[w], selectedChats[(w+1)])
+            }
+          }
+        }).getCertainPrivateChat(data[t]);
+      }
+      
+    
+      document.getElementById("privateChats").innerHTML = document.getElementById("privateChats").innerHTML + "<button onclick='updatePrivateChats()'>Update All Private Chats</button>";
+      
+  }).getPrivateChatList(document.getElementById("lastUsername").innerHTML);
+  
+}
+
 window.showPrivateChats = function showPrivateChats() {
   var beforeChange = document.getElementById("privateChats").hidden;
   document.getElementById("privateChats").hidden = !document.getElementById("privateChats").hidden;
@@ -23,9 +91,7 @@ window.showPrivateChats = function showPrivateChats() {
     document.getElementById("second-main-container").hidden = true;
     document.getElementById("signinForm").hidden = true;
     document.getElementById("createAccountForm").hidden = true;
-
-    
-
+    updatePrivateChats();
     document.getElementById("privateDMsB").innerText = "Back To Chat";
   } else {
     if(beforeChange == false) {
