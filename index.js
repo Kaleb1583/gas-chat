@@ -30,7 +30,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   var divName = "PrivateChatData" + chatNumber;
   var chatLine = document.createElement("p");
   chatLine.innerHTML = "<div><h3 onclick='toggleVisibility(`" + String(id) + "`)'> " + String(chatName) +  "</h3></div>";
-  document.getElementById(divName).appendChild(privateChatName);  
+  document.getElementById(divName).appendChild(chatLine);  
   var chats = Array(data.split(","));
   for(j=0; j < chats.length; j++) {
     console.log(chats)
