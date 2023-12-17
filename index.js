@@ -556,7 +556,6 @@ window.showChatSearch = function showChatSearch() {
 
     setTimeout(() => { refresh(); }, 1000); 
   }
-  //refresh();
 
   window.login = function login() {
     var username = document.getElementById("loginusername").value;
