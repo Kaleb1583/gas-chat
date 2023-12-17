@@ -33,7 +33,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
 }
 
 window.updatePrivateChats = function updatePrivateChats() {
-  //console.clear();
+  console.clear();
   document.getElementById("privateChats").innerHTML = "Click The Chat Name To View";
   
   
