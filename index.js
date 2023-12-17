@@ -361,7 +361,6 @@ window.showChatSearch = function showChatSearch() {
     pf2a1a3nhagx33a1wph264.script.run.send(String(username), String(chat), "", roomInt);
     if(doUpdate) {
 
-      var roomInt = document.getElementById("roomName").innerHTML;
       if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
         alert("ERROR: INVALID ROOM NUMBER");
         document.getElementById("roomName").innerHTML = "Room1";
