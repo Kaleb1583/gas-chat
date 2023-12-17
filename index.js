@@ -76,7 +76,7 @@ window.updatePrivateChats = function updatePrivateChats() {
             if(w==0) {
               // first chat is the chat name rest is the chats, shift removes the chat name and leaves just the chats.
               console.log(selectedChats)
-              createPrivateChatElement(selectedChats[w], chatList, privateChatNumber)
+              createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
           }
         }).getCertainPrivateChat(data[t]);
