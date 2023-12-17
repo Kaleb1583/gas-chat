@@ -21,22 +21,16 @@ window.toggleVisibility = function toggleVisibility(id) {
 
 window.createPrivateChatElement = function createPrivateChatElement(chatName, data, chatNumber) {
 
-  if( String(document.getElementById("PrivateChatCount").innerHTML).includes("Your") ) {} else {
+  if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {} else {
     document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
   }
-  //console.log("Chat Name: " + chatName)
-  //console.log("Chat Data: " + data)
   var id = String(chatName).replace(" ", "");
   var divName = "PrivateChatData" + chatNumber;
-  var chatLine = document.createElement("p");
-  chatLine.innerHTML = "<div><h3 onclick='toggleVisibility(`" + String(id) + "`)'> " + String(chatName) +  "</h3></div>";
-  document.getElementById(divName).appendChild(chatLine);  
-  var chats = data.split(",");
-  for(j=0; j < chats.length; j++) {
-    console.log(chats)
-    //document.getElementById(id).append(String(chats[j]));
-  }
-  
+  var chatLine = document.createElement("div");
+  chatLine.innerHTML = "<h3 onclick='toggleVisibility(`" + String(id) + "`)'> " + String(chatName) +  "</h3>";
+  document.getElementById(String(divName)).appendChild(chatLine);  
+  console.log("ChatName: " + chatName)
+  console.log("Chats: " + data)
 }
 
 window.updatePrivateChats = function updatePrivateChats() {
@@ -87,7 +81,6 @@ window.updatePrivateChats = function updatePrivateChats() {
         }).getCertainPrivateChat(data[t]);
       }
       
-    
       document.getElementById("privateChats").innerHTML = document.getElementById("privateChats").innerHTML + "<button onclick='updatePrivateChats()'>Update All Private Chats</button>";
       
   }).getPrivateChatList(document.getElementById("lastUsername").innerHTML);
@@ -116,7 +109,6 @@ window.showPrivateChats = function showPrivateChats() {
 window.toggleLightDark = function toggleLightDark() {
   var body = document.body;
   body.classList.toggle("dark-mode");
-  
 }
 
 window.signout = function signout() {
