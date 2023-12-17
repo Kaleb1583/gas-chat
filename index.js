@@ -55,7 +55,7 @@ window.updatePrivateChats = function updatePrivateChats() {
         var privateChatNumber = document.getElementById("PrivateChatCount").innerHTML;
         var id = data[t];
         var newPrivateChatDataElement = document.createElement("div");
-        newPrivateChatDataElement.id = "PCData" + chatNumber;
+        newPrivateChatDataElement.id = "PCData" + privateChatNumber;
         document.getElementById("privateChats").append(newPrivateChatDataElement);
         pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
           var selectedChats = chat.split(",");
