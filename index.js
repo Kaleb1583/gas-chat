@@ -77,6 +77,7 @@ window.updatePrivateChats = function updatePrivateChats() {
             document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
             if(w==0) {
               // first chat is the chat name rest is the chats, shift removes the chat name and leaves just the chats.
+              console.log(selectedChats)
               createPrivateChatElement(selectedChats[w], chatList, privateChatNumber)
             }
           }
