@@ -11,7 +11,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {} else {
     document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
   }
-  var id = String(chatName).replace(" ", "");
+  var id = String(chatName);
   var chatNameLine = document.createElement("div");
   chatNameLine.id = String(chatName).replaceAll(" ", "");
   chatNameLine.innerHTML = "<h3 onclick='toggleVisibility(" + String(chatName).replaceAll(" ", "") + ");'>" + String(chatName) +  "</h3>";
