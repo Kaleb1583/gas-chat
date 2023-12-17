@@ -52,9 +52,6 @@ window.updatePrivateChats = function updatePrivateChats() {
         document.getElementById("PrivateChatCount").innerHTML = Number(document.getElementById("PrivateChatCount").innerHTML) + 1;
         var privateChatNumber = document.getElementById("PrivateChatCount").innerHTML;
         var id = data[t];
-        //var newPrivateChatDataElement = document.createElement("div");
-        //newPrivateChatDataElement.id = "PCData" + privateChatNumber;
-        //document.getElementById("privateChats").append(newPrivateChatDataElement);
         pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
           var selectedChats = chat.split(",");
           for(w=0; w < selectedChats.length; w++) {
