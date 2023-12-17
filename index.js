@@ -74,7 +74,7 @@ window.updatePrivateChats = function updatePrivateChats() {
           for(w=0; w < selectedChats.length; w++) {
             document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
             if(w==0) {
-              createPrivateChatElement(selectedChats[w], selectedChats, privateChatNumber)
+              createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
           }
         }).getCertainPrivateChat(data[t]);
