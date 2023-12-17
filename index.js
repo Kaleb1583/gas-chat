@@ -2,15 +2,6 @@
 
 var pf2a1a3nhagx33a1wph264 = google;
 
-window.getCookie = function getCookie(name) {
-  var cookies = document.cookie;
-}
-window.setCookie = function setCookie(name, value) {
-  document.cookie = String(name) + "=" + String(value)+ "; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
-}
-window.deleteCookie = function deleteCookie(cookie) {
-  document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
 window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
 }
@@ -21,7 +12,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
     document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
   }
   var id = String(chatName).replace(" ", "");
-  var divName = "PrivateChatData" + chatNumber;
+  var divName = "PCData" + String(chatName);
   var chatNameLine = document.createElement("div");
   chatNameLine.innerHTML = "<h3 onclick='toggleVisibility(`" + String(divName) + "`)'> " + String(chatName) +  "</h3>";
   document.getElementById(String(divName)).appendChild(chatNameLine);  
@@ -38,7 +29,6 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
 window.updatePrivateChats = function updatePrivateChats() {
   console.clear();
   document.getElementById("privateChats").innerHTML = "Click The Chat Name To View";
-  
   
   if(document.getElementById("PrivateChatCount") == null) {  
     //document.getElementById("PrivateChatCount").remove();   
@@ -64,12 +54,12 @@ window.updatePrivateChats = function updatePrivateChats() {
         var privateChatNumber = document.getElementById("PrivateChatCount").innerHTML;
         var id = data[t];
         var newPrivateChatDataElement = document.createElement("div");
-        newPrivateChatDataElement.id = "PrivateChatData" + privateChatNumber;
+        newPrivateChatDataElement.id = "";
         document.getElementById("privateChats").append(newPrivateChatDataElement);
         pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
-          //console.log(chat)
           var selectedChats = chat.split(",");
           for(w=0; w < selectedChats.length; w++) {
+            console.log(seleectedChats[w])
             if(w==0) {
               createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
