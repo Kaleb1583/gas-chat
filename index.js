@@ -660,10 +660,12 @@ window.redirectToProblems = function redirectToProblems() {
   }).getScriptURL();
 }
 
+// anti tampering
 
 //google = "";
+//document.getElementById("getJSDiv").remove();
+// ^ decreases the abillity for the code to be found and used maliciously
 
-document.getElementById("getJSDiv").remove();
-// ^ hide evidence of this exsisting which kinda hides it which then decreases the abillity for the code to be found and used maliciously
+//---------------
 
 // end
