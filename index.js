@@ -2,7 +2,6 @@
 
 var pf2a1a3nhagx33a1wph264 = google;
 
-
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
 }
@@ -580,8 +579,9 @@ window.showChatSearch = function showChatSearch() {
         document.getElementById("welcome").innerHTML = "Welcome: {Username}! You Have: {PointCount} Points."; //bookmark
         document.getElementById("lastUsername").innerHTML = document.getElementById("loginusername").value;
         showLogin(); 
-        document.getElementById("guest-footer").hidden = true; 
-        pf2a1a3nhagx33a1wph264.script.run.send("<b>Chat</b>", " " + document.getElementById("loginusername").value + " joined!");
+        document.getElementById("guest-footer").hidden = true;
+        var roomName = document.getElementById("roomName").innerHTML;
+        pf2a1a3nhagx33a1wph264.script.run.send("<b>Chat</b>", " " + document.getElementById("loginusername").value + " joined!", roomName);
         setTimeout(() => { updateChat(); }, 2500);
         document.getElementById("signup").hidden = true;
         document.getElementById("signin").hidden = true;
