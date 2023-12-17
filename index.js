@@ -5,15 +5,12 @@ var pf2a1a3nhagx33a1wph264 = google;
 window.getCookie = function getCookie(name) {
   var cookies = document.cookie;
 }
-
 window.setCookie = function setCookie(name, value) {
   document.cookie = String(name) + "=" + String(value)+ "; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 }
-
 window.deleteCookie = function deleteCookie(cookie) {
   document.cookie = String(cookie) + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
-
 window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
 }
