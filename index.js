@@ -44,7 +44,7 @@ window.updatePrivateChats = function updatePrivateChats() {
   
   
   if(document.getElementById("PrivateChatCount") == null) {  
-    document.getElementById("PrivateChatCount").remove();   
+    //document.getElementById("PrivateChatCount").remove();   
     var count = document.createElement("p");
     count.id = "PrivateChatCount";
     document.body.append(count);
@@ -56,7 +56,6 @@ window.updatePrivateChats = function updatePrivateChats() {
   }
 
   pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
-
       document.getElementById("privateChats").innerHTML = "<br>";
       document.getElementById("privateChats").hidden = false;
       var count = document.createElement("p");
@@ -73,25 +72,14 @@ window.updatePrivateChats = function updatePrivateChats() {
         pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
           //console.log(chat)
           var selectedChats = chat.split(",");
-          var certainPrivateChatChatCount = document.createElement("p");
-          certainPrivateChatChatCount.id = "PrivateChatChatCount";
-          certainPrivateChatChatCount.innerHTML = "0";
-          certainPrivateChatChatCount.hidden = true;
-          document.body.append(certainPrivateChatChatCount);
           for(w=0; w < selectedChats.length; w++) {
-            document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
             if(w==0) {
-              // first chat is the chat name rest is the chats, shift removes the chat name and leaves just the chats.
-              //a
-              //console.log(selectedChats)
               createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
           }
         }).getCertainPrivateChat(data[t]);
       }
-      
       document.getElementById("privateChats").innerHTML = document.getElementById("privateChats").innerHTML + "<button onclick='updatePrivateChats()'>Update All Private Chats</button>";
-      
   }).getPrivateChatList(document.getElementById("lastUsername").innerHTML);
   
 }
