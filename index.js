@@ -39,7 +39,7 @@ window.updatePrivateChats = function updatePrivateChats() {
     document.getElementById("PrivateChatCount").remove();
     var count = document.createElement("p");
     count.id = "PrivateChatCount";
-    document.body.append(count);
+    document.body.append(count); 
   }
 
   pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
@@ -50,6 +50,7 @@ window.updatePrivateChats = function updatePrivateChats() {
       count.hidden = true;
       var u = [];
       for(t=0; t < data.length; t++) {
+        console.log("data[" + t + "] " + data[t])
         document.getElementById("PrivateChatCount").innerHTML = Number(document.getElementById("PrivateChatCount").innerHTML) + 1;
         var privateChatNumber = document.getElementById("PrivateChatCount").innerHTML;
         var id = data[t];
