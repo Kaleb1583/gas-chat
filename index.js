@@ -71,11 +71,13 @@ window.updatePrivateChats = function updatePrivateChats() {
           certainPrivateChatChatCount.innerHTML = "0";
           certainPrivateChatChatCount.hidden = true;
           document.body.append(certainPrivateChatChatCount);
+          var chatList = selectedChats;
+          chatList.shift();
           for(w=0; w < selectedChats.length; w++) {
             document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
             if(w==0) {
               // first chat is the chat name rest is the chats, shift removes the chat name and leaves just the chats.
-              createPrivateChatElement(selectedChats[w], selectedChats.shift(), privateChatNumber)
+              createPrivateChatElement(selectedChats[w], chatList, privateChatNumber)
             }
           }
         }).getCertainPrivateChat(data[t]);
