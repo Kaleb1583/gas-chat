@@ -13,14 +13,17 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   }
   var id = String(chatName).replace(" ", "");
   var chatNameLine = document.createElement("div");
-  chatNameLine.innerHTML = "<h3 onclick='toggleVisibility()'>" + String(chatName) +  "</h3>";
+  chatNameLine.id = String(chatName);
+  chatNameLine.innerHTML = "<h3 onclick='toggleVisibility(" + String(chatName).replaceAll(" ", "") + ");'>" + String(chatName) +  "</h3>";
   document.getElementById("privateChats").appendChild(chatNameLine);  
   console.log("ChatName: " + chatName)
-  //console.log("Chats: " + data)
   data = data.split(",");
-  console.log(data)
+  //console.log(data)
   for(r=0; r < data.length; r++) {
-    //var chatLine = document.createElement
+    var chatLine = document.createElement("p");
+    //chatLine.id = 
+    chatLine.innerHTML = String(data[r]);
+    document.getElementById(String(chatName)).appendChild(chatLine);
   }
 }
 
