@@ -59,7 +59,7 @@ window.updatePrivateChats = function updatePrivateChats() {
         pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
           var selectedChats = chat.split(",");
           for(w=0; w < selectedChats.length; w++) {
-            console.log(seleectedChats[w])
+            console.log(selectedChats[w])
             if(w==0) {
               createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
