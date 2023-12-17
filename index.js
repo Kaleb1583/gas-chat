@@ -43,7 +43,8 @@ window.updatePrivateChats = function updatePrivateChats() {
   document.getElementById("privateChats").innerHTML = "Click The Chat Name To View";
   
   
-  if(document.getElementById("PrivateChatCount") == null) {    
+  if(document.getElementById("PrivateChatCount") == null) {  
+    document.getElementById("PrivateChatCount").remove();   
     var count = document.createElement("p");
     count.id = "PrivateChatCount";
     document.body.append(count);
@@ -82,7 +83,7 @@ window.updatePrivateChats = function updatePrivateChats() {
             if(w==0) {
               // first chat is the chat name rest is the chats, shift removes the chat name and leaves just the chats.
               //a
-              console.log(selectedChats)
+              //console.log(selectedChats)
               createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
           }
