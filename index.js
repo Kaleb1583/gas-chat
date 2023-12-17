@@ -71,7 +71,7 @@ window.updatePrivateChats = function updatePrivateChats() {
           certainPrivateChatChatCount.innerHTML = "0";
           certainPrivateChatChatCount.hidden = true;
           document.body.append(certainPrivateChatChatCount);
-          var chatList = chat;
+          var chatList = chat.split(",");
           chatList.shift();
           for(w=0; w < selectedChats.length; w++) {
             document.getElementById("PrivateChatChatCount").innerHTML = Number(document.getElementById("PrivateChatChatCount").innerHTML) + 1;
