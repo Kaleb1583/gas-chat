@@ -31,8 +31,10 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   console.log("ChatName: " + chatName)
   console.log("Chats: " + data)
   data = data.split(",");
+  console.log(data)
   for(r=0; r < data.length; r++) {
     //var chatLine = document.createElement
+    
   }
 }
 
