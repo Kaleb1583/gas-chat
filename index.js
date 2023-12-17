@@ -25,11 +25,15 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   }
   var id = String(chatName).replace(" ", "");
   var divName = "PrivateChatData" + chatNumber;
-  var chatLine = document.createElement("div");
-  chatLine.innerHTML = "<h3 onclick='toggleVisibility(`" + String(divName) + "`)'> " + String(chatName) +  "</h3>";
-  document.getElementById(String(divName)).appendChild(chatLine);  
+  var chatNameLine = document.createElement("div");
+  chatNameLine.innerHTML = "<h3 onclick='toggleVisibility(`" + String(divName) + "`)'> " + String(chatName) +  "</h3>";
+  document.getElementById(String(divName)).appendChild(chatNameLine);  
   console.log("ChatName: " + chatName)
   console.log("Chats: " + data)
+  data = data.split(",");
+  for(r=0; r < data.length; r++) {
+    //var chatLine = document.createElement
+  }
 }
 
 window.updatePrivateChats = function updatePrivateChats() {
