@@ -30,7 +30,6 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
 
 window.updatePrivateChats = function updatePrivateChats() {
   console.clear();
-  document.getElementById("privateChats").innerHTML = "Click The Chat Name To View";
   
   if(document.getElementById("PrivateChatCount") == null) {  
     //document.getElementById("PrivateChatCount").remove();   
@@ -64,7 +63,6 @@ window.updatePrivateChats = function updatePrivateChats() {
           }
         }).getCertainPrivateChat(data[t]);
       }
-      document.getElementById("privateChats").innerHTML = document.getElementById("privateChats").innerHTML + "<button onclick='updatePrivateChats()'>Update All Private Chats</button>";
   }).getPrivateChatList(document.getElementById("lastUsername").innerHTML);
   
 }
