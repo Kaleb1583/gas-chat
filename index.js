@@ -24,7 +24,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
     var chatLine = document.createElement("p");
     //chatLine.id = 
     chatLine.innerHTML = String(data[r]);
-    document.getElementById("chatNameLine" + String(chatNameLine).replaceAll(" ", "")).appendChild(chatLine);
+    document.getElementById(String(chatNameLine.id)).appendChild(chatLine);
   }
 }
 
