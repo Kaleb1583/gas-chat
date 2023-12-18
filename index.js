@@ -6,26 +6,22 @@ window.toggleVisibility = function toggleVisibility(id) {
 
 window.createPrivateChatElement = function createPrivateChatElement(chatName, data, chatNumber) {
 
-  if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {} else {
+  if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {
+  } else {
     document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
   }
   var id = String(chatName);
   var chatNameLine = document.createElement("div");
-  chatNameLine.id = "chatNameLine" + String(chatName).replaceAll(" ", "");
+  chatNameLine.id = id;
   chatNameLine.innerHTML = "<h3 onclick='toggleVisibility(`" + String(chatName) + "`);'>" + String(chatName) +  "</h3>";
-  document.getElementById("privateChats").appendChild(chatNameLine);  
-  var chatContainer = document.createElement("div");
-  chatContainer.id = String(chatName);
-
-  console.log("ChatName: " + chatName)
+  document.getElementById("privateChats").appendChild(chatNameLine);
   data = data.split(",");
-  //console.log(data)
   for(r=0; r < data.length; r++) {
     var chatLine = document.createElement("p");
-    //chatLine.id = 
     chatLine.innerHTML = String(data[r]);
     document.getElementById(String(chatName)).appendChild(chatLine);
   }
+
 }
 
 window.updatePrivateChats = function updatePrivateChats() {
