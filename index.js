@@ -4,8 +4,9 @@ window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
 }
 
-window.sendPrivateChatMessage = function sendPrivateChatMessage() {
-
+window.sendPrivateChatMessage = function sendPrivateChatMessage(privateMsg, privateChatName) {
+  console.log("Private Message: " + privateMsg)
+  console.log("Private Chat Name: " + privateChatName)
 }
 
 window.createPrivateChatElement = function createPrivateChatElement(chatName, data, chatNumber) {
@@ -25,7 +26,8 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
     chatLine.innerHTML = String(data[r]);
     document.getElementById(String(chatName)).appendChild(chatLine);
   }
-
+  document.getElementById("privateChats").append("<br> <input id='privateMsgInput'></input> <button id='sendB'></button>");
+  document.getElementById("sendB").onclick = sendPrivateChatMessage(String(document.getElementById("privateMsgInput").value), String(chatName));
 }
 
 window.updatePrivateChats = function updatePrivateChats() {
