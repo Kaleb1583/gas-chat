@@ -17,7 +17,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   var id = String(chatName);
   var chatNameLine = document.createElement("div");
   //chatNameLine.id = id;
-  chatNameLine.innerHTML = "<h3 onclick='toggleVisibility(`" + String(chatName) + "`);'>" + String(chatName) +  "</h3><div id='" + String(id) + "' hidden></div>";
+  chatNameLine.innerHTML = "<button onclick='toggleVisibility(`" + String(chatName) + "`);'>" + String(chatName) +  "</button><div id='" + String(id) + "' hidden></div>";
   document.getElementById("privateChats").appendChild(chatNameLine);
   data = data.split(",");
   for(r=0; r < data.length; r++) {
@@ -58,7 +58,6 @@ window.updatePrivateChats = function updatePrivateChats() {
         pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
           var selectedChats = chat.split(",");
           for(w=0; w < selectedChats.length; w++) {
-            //console.log(selectedChats[w])
             if(w==0) {
               createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
             }
