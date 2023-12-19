@@ -32,7 +32,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
 }
 
 window.updatePrivateChats = function updatePrivateChats() {
-  console.clear();
+  //console.clear();
   
   if(document.getElementById("PrivateChatCount") == null) {  
     //document.getElementById("PrivateChatCount").remove();   
