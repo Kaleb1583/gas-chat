@@ -5,11 +5,13 @@ window.toggleVisibility = function toggleVisibility(id) {
 }
 
 window.sendPrivateChatMessage = function sendPrivateChatMessage(privateMsg, privateChatName, sendButton) {
-  //document.getElementById("")
+  document.getElementById(String(sendButton)).hidden = true;
+
   console.log("Private Message: " + privateMsg)
   console.log("Private Chat Name: " + privateChatName)
   console.log("Button: " + sendButton)
-  
+
+  setTimeout(() => { document.getElementById(String(sendButton)).hidden = false; }, 5000);
 }
 
 window.randomID = function randomID(length) {
@@ -292,13 +294,11 @@ window.showChatSearch = function showChatSearch() {
       var firstOrder = [];
       var finishedList = [];
       for(i=0; i < lbData.length; i++) {
-        usernames.push(lbData[i].split("|")[0]) 
-        values.push(lbData[i].split("|")[1])
-        firstOrder.push(lbData[i]) 
+        usernames.push(lbData[i].split("|")[0]);
+        values.push(lbData[i].split("|")[1]);
+        firstOrder.push(lbData[i]);
       }
-
       var sortedValues = values.sort().reverse();
-      //console.log(sortedValues)
       for(x=0; x < values.length; x++) {
         lbStatus = (x+1); // 
         document.getElementById("leaderboardData").innerHTML = document.getElementById("leaderboardData").innerHTML + "#" + lbStatus + ". " + usernames[x] + ": " + sortedValues[x] + " Point(s) <br>";
