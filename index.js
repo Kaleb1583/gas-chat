@@ -9,6 +9,7 @@ window.sendPrivateChatMessage = function sendPrivateChatMessage(privateMsg, priv
   console.log("Private Message: " + privateMsg)
   console.log("Private Chat Name: " + privateChatName)
   console.log("Button: " + sendButton)
+  
 }
 
 window.randomID = function randomID(length) {
@@ -42,7 +43,7 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   }
   var inputbutton = document.createElement("div");
   var buttonId = randomID(8);
-  inputbutton.innerHTML = "<br> <input id='privateMsgInput'></input> <button id='" + buttonId + "' onclick='sendPrivateChatMessage(this.previousElementSibling.value, this.parentElement.parentElement.id, this)'>Send Private Chat</button>";
+  inputbutton.innerHTML = "<br> <input id='privateMsgInput'></input> <button id='" + buttonId + "' onclick='sendPrivateChatMessage(this.previousElementSibling.value, this.parentElement.parentElement.id, this.id)'>Send Private Chat</button>";
   document.getElementById(String(chatName)).appendChild(inputbutton);
 }
 
