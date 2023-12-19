@@ -54,6 +54,19 @@ window.createPrivateChatElement = function createPrivateChatElement(chatName, da
   document.getElementById(String(chatName)).appendChild(inputbutton);
 }
 
+/*
+window.show = function show() {
+
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+
+}
+*/
+
 window.updatePrivateChats = function updatePrivateChats() {
   //console.clear();
   
