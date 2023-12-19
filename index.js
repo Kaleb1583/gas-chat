@@ -14,7 +14,6 @@ window.sendPrivateChatMessage = function sendPrivateChatMessage(privateMsg, priv
   setTimeout(() => { document.getElementById(String(sendButton)).hidden = false; }, 5000);
   showPrivateChats(); // hide
   showPrivateChats(); // show which will update it
-  setTimeout(() => { document.getElementById(String(privateChatName)).hidden = false; }, 5000);
 }
 
 window.randomID = function randomID(length) {
