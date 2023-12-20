@@ -677,12 +677,11 @@ window.redirectToProblems = function redirectToProblems() {
   }).getScriptURL();
 }
 
-// anti tampering
+// (for anti tampering)
 
 //google = "";
 //document.getElementById("getJSDiv").remove();
-// ^ decreases the abillity for the code to be found and used maliciously
 
 //---------------
 
-// end
+// end of index.js file
