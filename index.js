@@ -1,20 +1,5 @@
-var string = "";
-var LettersAndNumbers = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-}
-
-for(i=0; i < Number(getRandomInt(16, 32)); i++) {
-    var randomInt = Math.floor(Math.random() * LettersAndNumbers.length);
-    string = string + LettersAndNumbers[randomInt];
-}
-
-location[string] = google;
-
-
+try {
+var pf2a1a3nhagx33a1wph264 = google;
 
 window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
@@ -695,9 +680,15 @@ window.redirectToProblems = function redirectToProblems() {
 
 // (for anti tampering)
 
-//google = "";
-//document.getElementById("getJSDiv").remove();
+google = "";
+document.getElementById("getJSDiv").remove();
 
 //---------------
 
 // end of index.js file
+
+catch(err) {
+
+  console.log("error in index.js")
+  
+}
