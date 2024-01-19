@@ -1,6 +1,7 @@
 console.log("started")
 
-var pf2a1a3nhagx33a1wph264 = google;
+// pf2a1a3nhagx33a1wph264
+var newgoogle = google;
 
 window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
