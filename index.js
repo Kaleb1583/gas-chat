@@ -2,7 +2,7 @@ console.log("started")
 
 // pf2a1a3nhagx33a1wph264
 window.google = google;
-var newgoogle = google;
+var pf2a1a3nhagx33a1wph264 = google;
 
 window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
