@@ -1,6 +1,7 @@
 console.log("started")
 
 // pf2a1a3nhagx33a1wph264
+window.google = google;
 var newgoogle = google;
 
 window.toggleVisibility = function toggleVisibility(id) {
