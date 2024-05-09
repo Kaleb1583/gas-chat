@@ -597,7 +597,7 @@ window.showChatSearch = function showChatSearch() {
     pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(response) {
       if(String(response) == "true") {
         document.getElementById("welcome").innerHTML = "Welcome: {Username}! You Have: {PointCount} Points."; //bookmark
-        document.getElementById("lastUsername").innerHTML = document.getElementById("loginusername").value;
+        document.getElementById("lastUsername").innerHTML = "Signed In As: " + document.getElementById("loginusername").value;
         showLogin(); 
         document.getElementById("guest-footer").hidden = true;
         //var roomName = document.getElementById("roomName").innerHTML;
