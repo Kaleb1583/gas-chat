@@ -308,6 +308,7 @@ window.showChatSearch = function showChatSearch() {
 
   window.updateLb = function updateLb() {
     document.getElementById("updateLbB").hidden = true;
+    console.log("aads")
     document.getElementById("leaderboardData").innerHTML = "";
     pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) { 
       var lbData = data;
