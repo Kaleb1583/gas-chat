@@ -307,6 +307,7 @@ window.showChatSearch = function showChatSearch() {
   }
 
   window.updateLb = function updateLb() {
+    document.getElementById("updateLbB").hidden = true;
     document.getElementById("leaderboardData").innerHTML = "";
     pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) { 
       var lbData = data;
@@ -325,6 +326,8 @@ window.showChatSearch = function showChatSearch() {
         document.getElementById("leaderboardData").innerHTML = document.getElementById("leaderboardData").innerHTML + "#" + lbStatus + ". " + usernames[x] + ": " + sortedValues[x] + " Point(s) <br>";
       }
     }).getLeaderboard();
+    
+    document.getElementById("updateLbB").hidden = false;
   }
 
 
@@ -672,13 +675,6 @@ window.showChatSearch = function showChatSearch() {
       } 
     }).isUserTaken(String(username));
   }
-
-
-window.redirectToProblems = function redirectToProblems() {
-  pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(url){
-    window.open(url+"?p=problems",'_top');
-  }).getScriptURL();
-}
 
 // (for anti tampering)
 
