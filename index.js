@@ -139,28 +139,6 @@ window.signout = function signout() {
   }).getScriptURL();
 }
 
-window.showLeaderboard = function showLeaderboard() {
-
-  if(document.getElementById("leaderboardDiv").hidden == true) {
-    document.getElementById("lbb").innerHTML = "Close Point Leaderboard";
-  } else {
-    document.getElementById("lbb").innerHTML = "Point Leaderboard";
-  }
-
-
-  var lbhiddenbefore = document.getElementById("leaderboardDiv").hidden;
-  document.getElementById("leaderboardDiv").hidden = !lbhiddenbefore;
-
-  var before3 = document.getElementById("second-main-container").hidden;
-  document.getElementById("second-main-container").hidden = !before3;
-
-
-  document.getElementById("signinForm").hidden = true;
-  document.getElementById("createAccountForm").hidden = true;
-
-  updateLb();
-}
-
 window.searchChat = function searchChat() {
   var searchTerm = document.getElementById("keyword").value;
   pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
@@ -305,32 +283,6 @@ window.showChatSearch = function showChatSearch() {
       document.getElementById(id).parentElement.removeChild(allElements[z]);
     }
   }
-
-  window.updateLb = function updateLb() {
-    document.getElementById("updateLbB").hidden = true;
-    
-    document.getElementById("leaderboardData").innerHTML = "";
-    pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) { 
-      var lbData = data;
-      var usernames = [];
-      var values = [];
-      var firstOrder = [];
-      var finishedList = [];
-      for(i=0; i < lbData.length; i++) {
-        usernames.push(lbData[i].split("|")[0]);
-        values.push(lbData[i].split("|")[1]);
-        firstOrder.push(lbData[i]);
-      }
-      var sortedValues = values.sort().reverse();
-      for(x=0; x < values.length; x++) {
-        lbStatus = (x+1); // 
-        document.getElementById("leaderboardData").innerHTML = document.getElementById("leaderboardData").innerHTML + "#" + lbStatus + ". " + usernames[x] + ": " + sortedValues[x] + " Point(s) <br>";
-      }
-    }).getLeaderboard();
-    
-    document.getElementById("updateLbB").hidden = false;
-  }
-
 
   window.setRoom = function setRoom(roomInt) {
     
