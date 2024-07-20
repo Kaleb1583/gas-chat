@@ -7,18 +7,6 @@ window.toggleVisibility = function toggleVisibility(id) {
   document.getElementById(id).hidden = !document.getElementById(id).hidden;
 }
 
-window.sendPrivateChatMessage = function sendPrivateChatMessage(privateMsg, privateChatName, sendButton) {
-  document.getElementById(String(sendButton)).hidden = true;
-
-  console.log("Private Message: " + privateMsg)
-  console.log("Private Chat Name: " + privateChatName)
-  console.log("Button: " + sendButton)
-
-  setTimeout(() => { document.getElementById(String(sendButton)).hidden = false; }, 5000);
-  showPrivateChats(); // hide
-  showPrivateChats(); // show which will update it
-}
-
 window.randomID = function randomID(length) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -29,103 +17,6 @@ window.randomID = function randomID(length) {
     counter += 1;
   }
   return result;
-}
-
-window.createPrivateChatElement = function createPrivateChatElement(chatName, data, chatNumber) {
-
-  if(String(document.getElementById("PrivateChatCount").innerHTML).includes("Your")) {
-  } else {
-    document.getElementById("PrivateChatCount").innerHTML = "(Your in " + String(Number(document.getElementById("PrivateChatCount").innerHTML) + " private chats.)");
-  }
-  var id = String(chatName);
-  var chatNameLine = document.createElement("div");
-  chatNameLine.style.border = "dashed";
-  chatNameLine.style.height = "75px";
-  chatNameLine.style.width = "150px";
-  chatNameLine.innerHTML = "<button onclick='toggleVisibility(`" + String(chatName) + "`);'>" + String(chatName) +  "</button><div id='" + String(id) + "' hidden></div>";
-  document.getElementById("privateChats").appendChild(chatNameLine);
-  data = data.split(",");
-  document.getElementById(String(chatName))
-  for(r=0; r < data.length; r++) {
-    var chatLine = document.createElement("p");
-    chatLine.innerHTML = String(data[r]);
-    document.getElementById(String(chatName)).appendChild(chatLine);
-  }
-  var inputbutton = document.createElement("div");
-  var buttonId = randomID(8);
-  inputbutton.innerHTML = "<br> <input id='privateMsgInput'></input> <button id='" + buttonId + "' onclick='sendPrivateChatMessage(this.previousElementSibling.value, this.parentElement.parentElement.id, this.id)'>Send Private Chat</button>";
-  document.getElementById(String(chatName)).appendChild(inputbutton);
-}
-
-/*
-window.show = function show() {
-
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-
-}
-*/
-
-window.updatePrivateChats = function updatePrivateChats() {
-  //console.clear();
-  
-  if(document.getElementById("PrivateChatCount") == null) {  
-    //document.getElementById("PrivateChatCount").remove();   
-    var count = document.createElement("p");
-    count.id = "PrivateChatCount";
-    document.body.append(count);
-  } else {
-    document.getElementById("PrivateChatCount").remove();
-    var count = document.createElement("p");
-    count.id = "PrivateChatCount";
-    document.body.append(count); 
-  }
-
-  pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
-      document.getElementById("privateChats").innerHTML = "<br>";
-      document.getElementById("privateChats").hidden = false;
-      var count = document.createElement("p");
-      count.id = "PrivateChatCount";
-      count.hidden = true;
-      var u = [];
-      for(t=0; t < data.length; t++) {
-        document.getElementById("PrivateChatCount").innerHTML = Number(document.getElementById("PrivateChatCount").innerHTML) + 1;
-        var privateChatNumber = document.getElementById("PrivateChatCount").innerHTML;
-        var id = data[t];
-        pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(chat) {
-          var selectedChats = chat.split(",");
-          for(w=0; w < selectedChats.length; w++) {
-            if(w==0) {
-              createPrivateChatElement(selectedChats[w], chat, privateChatNumber)
-            }
-          }
-        }).getCertainPrivateChat(data[t]);
-      }
-  }).getPrivateChatList(document.getElementById("lastUsername").innerHTML);
-  
-}
-
-window.showPrivateChats = function showPrivateChats() {
-  var beforeChange = document.getElementById("privateChats").hidden;
-  document.getElementById("privateChats").hidden = !document.getElementById("privateChats").hidden;
-  if(beforeChange == true) {
-    document.getElementById("privateChats").innerHTML = "";
-    document.getElementById("leaderboardDiv").hidden = true;
-    document.getElementById("second-main-container").hidden = true;
-    document.getElementById("signinForm").hidden = true;
-    document.getElementById("createAccountForm").hidden = true;
-    updatePrivateChats();
-    document.getElementById("privateDMsB").innerText = "Back To Chat";
-  } else {
-    if(beforeChange == false) {
-      document.getElementById("privateDMsB").innerText = "Private Chats";
-      document.getElementById("second-main-container").hidden = false;
-    }
-  }
 }
 
 window.toggleLightDark = function toggleLightDark() {
@@ -165,8 +56,6 @@ window.showChatSearch = function showChatSearch() {
 
   var before4 = document.getElementById("third-main-container").hidden;
   document.getElementById("third-main-container").hidden = !before4;
-
-  document.getElementById("leaderboardDiv").hidden = true;
 }
 
   window.showUsernameChanger = function showUsernameChanger() {
@@ -473,13 +362,11 @@ window.showChatSearch = function showChatSearch() {
       document.getElementById("signinForm").hidden = true;
       document.getElementById("chat").hidden = false;
       document.getElementById("send").hidden = false;
-      document.getElementById("leaderboardDiv").hidden = true;
     } else {
       document.getElementById("createAccountForm").hidden = false;
       document.getElementById("signinForm").hidden = true;
       document.getElementById("chat").hidden = true;
       document.getElementById("send").hidden = true;
-      document.getElementById("leaderboardDiv").hidden = true;
     }
   }
 
@@ -490,13 +377,11 @@ window.showChatSearch = function showChatSearch() {
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("chat").hidden = false;
       document.getElementById("send").hidden = false;
-      document.getElementById("leaderboardDiv").hidden = true;
     } else {
       document.getElementById("signinForm").hidden = false;
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("chat").hidden = true;
       document.getElementById("send").hidden = true;
-      document.getElementById("leaderboardDiv").hidden = true; 
     }
   }
 
