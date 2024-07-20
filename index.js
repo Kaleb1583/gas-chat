@@ -469,6 +469,7 @@ window.showChatSearch = function showChatSearch() {
     pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(bool) { 
 
       if(bool == true) {
+        document.getElementById("isAccountCreatedBoolean").innerHTML = "true";
         alert("Account Was Created!")
         var username = document.getElementById("createusername").value;
         var password = document.getElementById("createpassword").value;
@@ -499,7 +500,8 @@ window.showChatSearch = function showChatSearch() {
   }
 
   var interval = setInterval(function() {
-    if(document.getElementById("createAccountForm").hidden == false) {
+    var wasAccJustCreated = String(document.getElementById("isAccountCreatedBoolean"));
+    if(document.getElementById("createAccountForm").hidden == false && wasAccJustCreated == false) { // if user is in
       loopToCheckIfUserIsTaken();
     }
   }, 5000);
