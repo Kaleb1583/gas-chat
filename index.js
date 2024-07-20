@@ -359,14 +359,19 @@ window.showChatSearch = function showChatSearch() {
     //document.getElementById("chatSearchDiv").hidden = !document.getElementById("chatSearchDiv").hidden;
     if(document.getElementById("createAccountForm").hidden == false) {
       // hide account creator / signup element 
+      
       document.getElementById("signup").innerText = "Sign Up";
+      
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("signinForm").hidden = true;
       document.getElementById("chat").hidden = false;
       document.getElementById("send").hidden = false;
     } else {
       // show account creator / signup element
+      
+      document.getElementById("signin").innerText = "Sign In"; // this makes it so there cant be two back buttons 
       document.getElementById("signup").innerText = "Back";
+      
       document.getElementById("createAccountForm").hidden = false;
       document.getElementById("signinForm").hidden = true;
       document.getElementById("chat").hidden = true;
@@ -377,15 +382,20 @@ window.showChatSearch = function showChatSearch() {
   window.showLogin = function showLogin() { 
     document.getElementById("welcome").hidden = !document.getElementById("welcome").hidden;
     if(document.getElementById("signinForm").hidden == false) {
-// hide login element
+      // hide login element
+      
       document.getElementById("signin").innerText = "Sign In";
+      
       document.getElementById("signinForm").hidden = true;
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("chat").hidden = false;
       document.getElementById("send").hidden = false;
     } else {
       // show login element
+      
+      document.getElementById("signup").innerText = "Sign Up"; // this makes it so there cant be two back buttons 
       document.getElementById("signin").innerText = "Back";
+      
       document.getElementById("signinForm").hidden = false;
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("chat").hidden = true;
