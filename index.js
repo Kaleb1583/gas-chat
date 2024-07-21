@@ -128,15 +128,20 @@ window.showChatSearch = function showChatSearch() {
   window.showAccountDetails = function showAccountDetails() {
     document.getElementById("accountDetailsUsername").innerHTML = "Your Username: &#123;Username&#125;";
     document.getElementById("accountDetailsRank").innerHTML = "Your Rank: &#123;UserRank&#125;";
-
     var before = document.getElementById("accountDetailsDiv").hidden;
     document.getElementById("accountDetailsDiv").hidden = !before;
     var after = !before;
     if(after == true) {
+      // show account details
       document.getElementById("showAccountDetailsB").innerHTML = " Account Manage ";
-      document.getElementById("chat").hidden = false;
-    } else {
       document.getElementById("chat").hidden = true;
+      document.getElementById("send").hidden = true;
+      document.getElementById("first-main-container").hidden = true;
+    } else {
+      // hide account details
+      document.getElementById("first-main-container").hidden = false;
+      document.getElementById("chat").hidden = false;
+      document.getElementById("send").hidden = false;      
       document.getElementById("showAccountDetailsB").innerHTML = " Back To Chat "; 
       document.getElementById("accountDetailsUsername").innerHTML = "Your Username: " + document.getElementById("lastUsername").innerText;
       pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
@@ -359,19 +364,17 @@ window.showChatSearch = function showChatSearch() {
     //document.getElementById("chatSearchDiv").hidden = !document.getElementById("chatSearchDiv").hidden;
     if(document.getElementById("createAccountForm").hidden == false) {
       // hide account creator / signup element 
-      
-      document.getElementById("signup").innerText = "Sign Up";
-      
+      document.getElementById("send").hidden = false;
+      document.getElementById("signup").innerText = "Sign Up"; 
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("signinForm").hidden = true;
       document.getElementById("chat").hidden = false;
       document.getElementById("send").hidden = false;
     } else {
       // show account creator / signup element
-      
+      document.getElementById("send").hidden = true;
       document.getElementById("signin").innerText = "Sign In"; // this makes it so there cant be two back buttons 
       document.getElementById("signup").innerText = "Back";
-      
       document.getElementById("createAccountForm").hidden = false;
       document.getElementById("signinForm").hidden = true;
       document.getElementById("chat").hidden = true;
@@ -383,19 +386,17 @@ window.showChatSearch = function showChatSearch() {
     document.getElementById("welcome").hidden = !document.getElementById("welcome").hidden;
     if(document.getElementById("signinForm").hidden == false) {
       // hide login element
-      
+      document.getElementById("send").hidden = true;
       document.getElementById("signin").innerText = "Sign In";
-      
       document.getElementById("signinForm").hidden = true;
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("chat").hidden = false;
       document.getElementById("send").hidden = false;
     } else {
       // show login element
-      
+      document.getElementById("send").hidden = true;
       document.getElementById("signup").innerText = "Sign Up"; // this makes it so there cant be two back buttons 
       document.getElementById("signin").innerText = "Back";
-      
       document.getElementById("signinForm").hidden = false;
       document.getElementById("createAccountForm").hidden = true;
       document.getElementById("chat").hidden = true;
