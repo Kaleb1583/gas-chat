@@ -1,24 +1,33 @@
-this is a public chat i made with google apps script
+# Public Chat Using Google Apps Script
 
+This is a public chat system I made using Google Apps Script.
 
-add html file, name it "index", paste html
-add gs file, name it "code", paste gs
+### Instructions
 
-(index.js is fetched in the html file and if you want to customize it fork this repo then replace my kaleb1583/gas-chat/index.js with yours YOURUSERNAME/gas-chat/index.js)
+1. **Add HTML file**: Name it `index.html`, and paste the provided HTML code.
+2. **Add GS file**: Name it `code.gs`, and paste the provided Google Apps Script code.
 
+The `index.js` file is fetched in the HTML file. If you want to customize it, fork this repo, then replace the url in the html file thats = to `kaleb1583/gas-chat/index.js` with yours: `YOURUSERNAME/gas-chat/index.js`.
 
-Note: i used google sheets as the database which may not be that secure and if you plan on downloading and making your own private in a way chat youll have to make sheets and update the ids in the code.gs file
+### Important Note
+I used **Google Sheets** as the database, which may not be the most secure option. If you plan to create your own private chat, you’ll need to:
+- Set up your own Google Sheets.
+- Update the sheet IDs in the `code.gs` file to match your sheets.
 
-## What I was doing on 7.20.24 (and after probably)
+---
 
-1. Reviewing code
-2. Finding errors and fixing them
-3. Making sure it's functional (related to #2)
-4. Updating `code.gs` so there are constants (like a variable that holds the ID and names it) that equal sheet IDs.  
-   - This way, you only have to edit constants instead of every instance of `getSpreadsheetById({ssid})`.  
-   - It will become `getSpreadsheetById(SS_ID_CONSTANT)`.
+## What I was Doing on 7.20.24 (and afterward)
 
+1. **Reviewing code**
+2. **Finding and fixing errors**
+3. **Ensuring functionality** (related to #2)
+4. **Updating `code.gs`**:  
+   - Added constants for the sheet IDs, so instead of calling `getSpreadsheetById({ssid})` everywhere, you can use `getSpreadsheetById(SS_ID_CONSTANT)`.
 
-10.1.24:
-    i dont know if i fixed all the errors thats able to be noticed and i also dont know if all the spreadsheet (db's) are all set to the vars at the start of the .gs script
-    im gonna upload the full thing since i just came back to this repo after forgetting it exsisted so i havent checked for any error but i dont wanna gatekeep it so here it is!.
+---
+
+### 10.1.24 Update
+
+I’m not sure if I’ve fixed all the errors that can be found, and I also don’t know if all the spreadsheets (databases) are properly set to the variables at the start of the `.gs` script.
+
+Since I recently rediscovered this repo after forgetting about it, I haven’t checked for any new errors. However, I don’t want to keep it private, so here it is!
