@@ -9,11 +9,14 @@ add gs file, name it "code", paste gs
 
 Note: i used google sheets as the database which may not be that secure and if you plan on downloading and making your own private in a way chat youll have to make sheets and update the ids in the code.gs file
 
-What i was doing on 7.20.24 (and after prob):
-    1. reviewing code
-    2. finding errors and fixing them
-    3. making sure its functional (goes with 2.)
-    4. updating code.gs so theres constants (<- like a variable that hold the id and names it) that equal sheet ids so you only have to edit constants instead of every getSpreadsheetById({ssid}) it will be getSpreedsheetById(SS Id constant)
+## What I was doing on 7.20.24 (and after probably)
+
+1. Reviewing code
+2. Finding errors and fixing them
+3. Making sure it's functional (related to #2)
+4. Updating `code.gs` so there are constants (like a variable that holds the ID and names it) that equal sheet IDs.  
+   - This way, you only have to edit constants instead of every instance of `getSpreadsheetById({ssid})`.  
+   - It will become `getSpreadsheetById(SS_ID_CONSTANT)`.
 
 
 10.1.24:
