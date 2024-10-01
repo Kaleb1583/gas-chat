@@ -16,7 +16,7 @@ I used **Google Sheets** as the database, which may not be the most secure optio
 
 ---
 
-## What I was Doing on 7.20.24 (and afterward)
+## What I was Doing around / during & after 7.20.24
 
 1. **Reviewing code**
 2. **Finding and fixing errors**
