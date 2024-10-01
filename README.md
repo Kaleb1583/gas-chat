@@ -1,5 +1,12 @@
 this is a public chat i made with google apps script
 
+
+add html file, name it "index", paste html
+add gs file, name it "code", paste gs
+
+(index.js is fetched in the html file and if you want to customize it fork this repo then replace my kaleb1583/gas-chat/index.js with yours YOURUSERNAME/gas-chat/index.js)
+
+
 Note: i used google sheets as the database which may not be that secure and if you plan on downloading and making your own private in a way chat youll have to make sheets and update the ids in the code.gs file
 
 What i was doing on 7.20.24 (and after prob):
