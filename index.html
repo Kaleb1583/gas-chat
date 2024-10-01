@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <!--  -->
+  <head>
+    <script>
+      function AntiKeyLogger() {
+        window.onkeydown = undefined;
+        window.onkeypress = undefined;
+        window.onkeyup = undefined;
+        document.onkeydown = undefined;
+        document.onkeypress = undefined;
+        document.onkeyup = undefined;
+      }
+      AntiKeyLogger();
+
+      function checkForPreviousSignIn() {
+        
+      }
+    </script>
+    <style>
+
+      .chat {
+        border: 1px solid black;
+        padding: 10px;
+        height: 300px;
+        overflow-y: scroll;
+      }
+
+      .input {
+        margin-top: 10px;
+        width: 25%;
+        padding: 10px;
+        border: 1px solid black;
+      }
+
+      .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      body {
+        padding: 15px;
+        background-color: white;
+        color: black;
+        font-size: 20px;
+      }
+
+      .dark-mode {
+        background-color: black;
+        color: white;
+      }
+
+      .button {
+        background-color: blue;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: white;
+        color: black;
+      }
+
+      // chat room selection css start
+      .dropbtn {
+        color: black;
+        font-size: 16px;
+        padding: auto;
+        border: outset;
+        border-color: black;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 195px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {background-color: #ddd;}
+      .dropdown:hover .dropdown-content {display: block;}
+      .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+      // end of chat room seletion css
+    </style>
+
+    <title>chat</title>
+
+    <base target="_top">
+    
+    <!-- (buttons up top) --> 
+
+    <div id="buttons" style=" display: inline-block; border-style: outset;">
+      <p style="display:inline" id="lastUsername"><b style='color: gray'>Signed In As: Guest Account </b></p><br>
+      <button class="button" id="signup" onclick="showCreateAccount();"> Sign Up </button>
+      <button class="button" id="signin" onclick="showLogin();"> Log In </button>
+      <button class="button" id="showChatSearch" onclick="showChatSearch();"> Chat History Search </button>
+      <button class="button" id="showAccountDetailsB" onclick="showAccountDetails();" hidden>Account</button>
+      <button class="button" id="signoutB" onclick="signout();" hidden>Signout</button>
+      <button class="button" onclick="toggleLightDark();">Light/Dark</button>
+    </div>
+
+    <!-- (end of buttons up top) --> 
+
+    <br>
+
+    <div id="first-main-container">
+      <br>
+      <p id="isUserTaken" hidden></p>
+      <p id="SID" hidden></p>
+      <h2 id="welcome"></h2>
+      Current Room: <p style="display: inline-block;" id="roomName">Room1</p>
+      <p id="currentViewCount"></p>
+      <p id="chatOutdated"></p>
+    </div>
+
+  </head>
+  <body>
+
+    <div id="accountDetailsDiv" hidden>
+      <div>
+        <p id="accountDetailsUsername">Your Username: &#123;Username&#125;</p>
+        <p id="accountDetailsRank">Your Rank: &#123;UserRank&#125;</p>
+      </div>
+
+      <div>
+        <button id="changeUsernameB" onclick="showUsernameChanger()">Change Username</button> <br>
+        <input id="newUsernameInput" type="text" hidden></input><br><button id="submitNewUsernameB" onclick="changeUsername();" hidden>Submit Username Change</button>
+      </div>
+
+      <p></p>
+
+      <div>
+        <button id="changePasswordB" onclick="showPasswordChanger()">Change Password</button>
+        <input id="newPasswordInput" type="text" hidden></input><br><button id="submitNewPasswordB" onclick="changePassword()" hidden>Submit Password Change</button>
+      </div>
+
+      <div>
+        <button id="deleteAccount" onclick="confirmDeleteAccount()"> Request To Delete Account</button>
+        <button id="deleteAccountConfirmation" onclick="requestAccountDeletion()" hidden>Yes, <b><u>I WANT TO DELETE MY ACCOUNT & I KNOW THERE IS NO GOING BACK</u></b></button>
+      </div>
+
+    </div> 
+
+    <div id="createAccountForm" hidden>
+      <h3>Log Up / Create An Account</h3>
+      Username: <input id="createusername"></input> <br>
+      Password: <input id="createpassword"></input> 
+      <button id="createAccButton" onclick="createAccount()">Create Account</button>
+      <p>(click sign up button at the top to go back to the chat)</p>
+      <p id="isTakenIsTrueShow"></p>
+
+      <!-- isAccountCreated, after creating an account it shows account taken because the account was created this is the attempted fix, boolean = t/f-->
+      <p id="isAccountCreatedBoolean" hidden>false</p>
+
+    </div>
+
+    <div id="signinForm" hidden>
+      <h3>Log In / Sign In</h3>
+      Username: <input id="loginusername"></input> <br>
+      Password: <input id="loginpassword"></input> 
+      <button onclick="login()">Login</button>
+      <p>(click log in button at the top to go back to the chat)</p>
+    </div>
+
+    <br><br>
+
+    <div id="chatSearchDiv" hidden>
+      Search: <input id="keyword" placeholder="type keyword here."></input> <br>
+      <button onclick="searchChat()">--- Search ---</button> <br>
+      <br>
+        <div id="chatSearchOutput">
+          --- Search for term or username ---
+        </div>
+      <br>
+    </div>
+
+
+    <div id="second-main-container">
+
+      <div id="chat" style="width: 65%; height: 350px; overflow: scroll;"></div>
+
+      <br>
+  
+      <div id="send" style="display: inline-block; border-style: outset;">
+
+        <p id="username" hidden>Guest</p>
+        <input style="input" list="cmds" placeholder="Hello everyone!" id="input"></input>
+
+        <datalist id="cmds">
+         <option value="!warnings">Info About Warnings</option>
+         <option value="!ping"></option>Ping! Pong!</option>
+         <option value="!solve 1+1">Solve Math</option>
+        </datalist>
+
+        <button id="sendButton" onclick="onbuttonclick()">Send</button>
+        <button onclick="updateChat()">Update Chat</button>
+
+        <div class="dropdown">
+
+          <button class="dropbtn">Choose Chat Room</button>
+
+          <div id="dropdowncontent" class="dropdown-content">
+
+            <a id="Room1A" onclick="setRoom(1);">1. Main Chat Room</a>
+            <a id="Room2A" onclick="setRoom(2);">2. Chat Room</a>
+            <a id="Room3A" onclick="setRoom(3);">3. Chat Room</a>
+
+          </div>
+
+        </div>
+  
+      </div>
+    </div>
+
+    <div id="third-main-container">
+
+      <br>
+
+      <div id="guest-footer"><h2><b>You're currently chatting as a guest.</b></h2></div> 
+
+      <button hidden onclick="redirectToProblems();">Known Problem Database</button>
+
+    </div>  
+    
+    <div><div><div><div><div><div>
+
+
+    <div hidden id="chatUpdateCheck"></div>
+
+    <div id="getJSDiv">
+
+    <script>
+      
+      google.script.run.withSuccessHandler(function(response) {
+        eval(String(response));
+      }).getJS();
+      
+
+    </script>
+    
+    </div>
+
+    <script>
+
+    setInterval(function(){ 
+      if(document.getElementById("second-main-container").hidden == false) {
+        var roomInt = document.getElementById("roomName").innerHTML;
+        if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
+          alert("Error: INVALID ROOM NUMBER, Setting to Room1 (Main Chat)");
+          document.getElementById("roomName").innerHTML = "Room1";
+          document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
+        }
+      }
+    }, 5000);
+    
+    </script>
+
+    <div id="hrjq32af493as"></div>
+    
+    </div></div></div></div></div></div>
+
+  </body>
+</html>
