@@ -169,10 +169,6 @@ window.showChatSearch = function showChatSearch() {
 
   window.deleteElementsById = function deleteElementsById(id) {
     var allElements = document.querySelectorAll('[id^="' + id + '"]');
-    //console.log(allElements)
-    //console.log(allElements)
-    //console.log(id)
-    //console.log("deleted elements with the id: " + id)
     for (let z = 0; z < allElements.length; z++) {
       document.getElementById(id).parentElement.removeChild(allElements[z]);
     }
@@ -188,14 +184,21 @@ window.showChatSearch = function showChatSearch() {
 
     if(roomInt == 1) {
       document.getElementById("roomName").innerHTML = "Room One";
-      document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
+      document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";      
+      document.getElementById("Room2A").innerText = "(2) Chat Room";
+      document.getElementById("Room3A").innerText = "(3) Chat Room";
+    
     } else {
       if(roomInt == 2) {
-        document.getElementById("roomName").innerHTML = "Room Two";
+        document.getElementById("roomName").innerHTML = "Room Two";  
+        document.getElementById("Room2A").innerText = "(1) Main Chat Room";
         document.getElementById("Room2A").innerText = "2. Chat Room (This Room)";
+        document.getElementById("Room3A").innerText = "(3) Chat Room";
       } else {
         if(roomInt == 3) {
           document.getElementById("roomName").innerHTML = "Room Three";
+          document.getElementById("Room1A").innerText = "(1) Main Chat Room";
+          document.getElementById("Room2A").innerText = "(2) Chat Room";
           document.getElementById("Room3A").innerText = "3. Chat Room (This Room)";
         } 
       }
