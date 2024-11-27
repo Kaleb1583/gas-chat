@@ -245,7 +245,8 @@ window.showChatSearch = function showChatSearch() {
       setTimeout(() => { document.getElementById("sendButton").hidden = false; }, 5000);
     } else {
       document.getElementById("sendButton").hidden = false;
-    }
+    }  
+      document.getElementById("input").value="";
   }
   
   window.hideAllBesidesChat = function hideAllBesidesChat() {
