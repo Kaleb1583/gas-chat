@@ -233,7 +233,7 @@ window.showChatSearch = function showChatSearch() {
 
       if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
         alert("ERROR: INVALID ROOM NUMBER");
-        document.getElementById("roomName").innerHTML = "Room1";
+        document.getElementById("roomName").innerHTML = "Room One";
         document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
       }
 
