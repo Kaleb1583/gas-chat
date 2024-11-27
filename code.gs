@@ -26,21 +26,15 @@ function getIP() { // i
   console.log(response)
 }
 
-
-
 // change this to your own modified version of js if you want
 function getJS() { 
   var response = UrlFetchApp.fetch('https://raw.githubusercontent.com/Kaleb1583/gas-chat/main/index.js').getContentText();
   return String(response);
 }
 
-
-
 function getScriptURL() {
-  //console.log(ScriptApp.getService().getUrl())
   return ScriptApp.getService().getUrl();
 }
-
 
 function didUsernameChange(oldUsername, newUsername) {
   var accnamechangedb = SpreadsheetApp.openById(accountNameChangeDatabaseSpreadSheet);
@@ -54,7 +48,6 @@ function didUsernameChange(oldUsername, newUsername) {
     if(String(selectedNameChangeOldUsername) == String(oldUsername)) { // bookmark trying to fix error
       nameChangeFound = true;
     }
-    //console.log(selectedNameChangeData)
 
   }
 
@@ -73,9 +66,7 @@ function changeUsernameRequest(oldUsername, newUsername) {
     var selectedUsersID = selectedAccountData[2];
     var selectedUsersRank = selectedAccountData[3];
     if(String(selectedUser) == String(oldUsername)) {
-      //console.log("(Match) " + String(selectedUser) + " = " + String(oldUsername))
       var accountNumber = "A" + String((r+1));
-      //console.log("Number in sheet db: " + accountNumber)
       var newData = String(newUsername) + "|" + String(selectedUsersPassword) + "|" + String(selectedUsersID) + "|" + String(selectedUsersRank);
       accdb.getRange(String(accountNumber)).setValue(String(newData));
       accnamechangedb.appendRow([String(oldUsername) + "|" + String(newUsername)])
@@ -103,8 +94,6 @@ function verifyUser(username, password) {
     if(String(user) == String(username)) {
       var selectedUsersUsername = selectedAccountData[0];
       var selectedUsersPassword = selectedAccountData[1];
-      console.log(selectedUsersUsername)
-      console.log(selectedUsersPassword)
       if(String(username) == String(selectedUsersUsername)) { 
         if(String(password) == String(selectedUsersPassword)) {
           isTheUser = true;
@@ -133,9 +122,7 @@ function requestAccountDeletion(username) {
     var selectedAccountData = String(accounts[u]).split("|");
     var user = selectedAccountData[0];
     if(String(user) == String(username)) {
-      //console.log("(Match) " + String(user) + " = " + String(username))
       accdb.deleteRow((u+1))
-      //console.log("deleted user: " + user + "'s account data in the account db.")
     }
   }
 
@@ -149,11 +136,8 @@ function requestAccountDeletion(username) {
     var selectedAccUsername = selectedAcc[0];
     if(String(selectedAccUsername) == String(username)) {
       pointDB.deleteRow((w+1));
-      //console.log("deleted user: " + selectedAccUsername + "'s point count in the point db.")
     }
   } 
-  
-  //console.log("Username: ' " + username + " '" + " (quote space username space quote)")
 }
 
 function checkToAutoBan() {
@@ -177,7 +161,6 @@ function checkToAutoBan() {
 
     } else {
       if(warningCount > 2) {
-        //console.log("Banning the user: " + String(user))
         send("<b>Chat</b>", "(Auto-Banner) banned the user: '" + user + "' due to pushing the limit for warnings. (!warnings for info)", "BOT")
         bA(String(user))
       }
@@ -197,15 +180,12 @@ function getProblemSubmissions() {
   var problems = problemDB.getDataRange().getValues();
   var problemList = "";
   for(t=0; t < problems.length; t++) {
-
-    //console.log(problems.length)
     if((t+1) == problems.length) { // gets rid of comma at last problem  exproblem, exproblem2,  -> exproblem, exproblem2
       problemList = problemList + problems[t];
     } else {
       problemList = problemList + problems[t] + ",";
     }
   }
-  //console.log(problemList)
   return String(problemList);
 }
 
@@ -224,11 +204,8 @@ function getUsersRank(username) {
     selectedAccountID = selectedAccountData[2];
     selectedAccountRank = selectedAccountData[3];
     if(String(username) == String(selectedAccountName)) {
-      //console.log(selectedAccountData)
       doesAccMatch = true;
       rank = selectedAccountRank;
-      //console.log(String(username) + " = " + String(selectedAccountName))
-      //console.log(rank)
     }
   }
 
@@ -328,10 +305,8 @@ function searchChatWithTerm(term) {
   } else {
     accountsSentMessages = accountsSentMessages + "<p><b>User: " + term + "'s Warnings:" + "</b></p><br><b>Warning Count: " + warningCount + " <br>" + warninglist;
   }
-  //console.log(accountsSentMessages)
   return String(accountsSentMessages);
 }
-
 
 // (bA = ban account)
 
@@ -343,8 +318,6 @@ function bA(username) {
     selectedAccountStuff = String(accounts[v]).split("|");
     var selectedAccountUsername = selectedAccountStuff[0];
     if(selectedAccountUsername == username) {
-      //console.log("found acc")
-      //console.log(v+1)
       accdb.deleteRow((v+1))
       var bannedusersdb = SpreadsheetApp.openById("1f-MaaSr2QNtDhjDW6zZXO-XA0bFM5WibyFzWCHMkar8");
       bannedusersdb.appendRow([username]);
@@ -381,12 +354,10 @@ function giveOnePoint(username) {
   var usernameandpointsvalues = pointDB.getDataRange().getValues();
   for(h=0; h < usernameandpointsvalues.length; h++) {
     if(usernameandpointsvalues[h][0] == String(username)) {
-      //console.log("Username: " + usernameandpointsvalues[h][0])
       var pointRange = "B" + String((h+1));
       var beforePointValue = Number(pointDB.getRange(pointRange).getValue());
       pointDB.getRange(pointRange).setValue((beforePointValue+1));
       var afterPointValue = Number(pointDB.getRange(pointRange).getValue());
-      //console.log("gave a point to user")
     }
   }
 }
@@ -398,15 +369,12 @@ function doCommand(cmd, user) {
       var cmd = cmd;
       var argCount = 0;
 
-      //console.log(String(cmd).split(" ") + ", [Sender: " + String(user) + "]")
-
+      
       if(String(cmd).split(" ").length == 2) {
-        //console.log("command, user (2 args)")
         argCount = 2;
       } 
 
       if(String(cmd).split(" ").length == 3) {
-        //console.log("command, user, -p (3 args)")
         argCount = 3;
       }
 
@@ -416,7 +384,6 @@ function doCommand(cmd, user) {
 
       if(cmdSplit[1] != undefined) {
         var cmdUserInput = cmdSplit[1];
-        //console.log(cmdUserInput)
       }
 
       if(argCount == 3) {
@@ -427,18 +394,25 @@ function doCommand(cmd, user) {
         }
       }
 
-      //console.log(command)
 
       // ping command start
       if(command == "!ping") {
-        //console.log("Command: Ping")
         var botName = "<span style='color:#196EFF;'>B</span><span style='color:#6552B6;'>o</span><span style='color:#B2376D;'>t: </span>";
-        send(botName, "Pong! " + "<b>(Replying To: " + String(user) + ")</b>", "BOT");
+        
+        displayName = String(user)
+
+        userRank = getUsersRank(displayName);
+
+        if(userRank != "") {
+          displayName = userRank + displayName;
+        }
+
+        send(botName, "Pong! " + "<b>(Re: " + String(displayName) + ")</b>", "BOT");
+
       } // ping command end
 
       // solve
       if(command == "!solve") {
-        //console.log("Command: Solve")
 
         var username = String(user);
 
@@ -509,7 +483,6 @@ function send(user, chat, isCodeRunning, roomNumber) {
       }
 
     
-    
       if(String(cleanchat).startsWith("!")) {
         doCommand(String(cleanchat), String(user))
       } else {
@@ -543,7 +516,6 @@ function send(user, chat, isCodeRunning, roomNumber) {
         var chatCountString = String(chatCount);
         var chatCountNumber = Number(chatCount);
         var chatCountBefore = (chatCountNumber - 1);
-        //console.log("sent: { " + chat + " }")
 
         if(String(rank) == "Owner" || String(rank) == "</>" || String(rank) == "Developer") {
           
@@ -553,14 +525,14 @@ function send(user, chat, isCodeRunning, roomNumber) {
       }
 
     } else {
-      //console.log("no user or chat given")
+      // no user or chat provided
     }
   }
 }
 
 
 function botChatCheck(chat, user) {
-  var cusswords = ["2 girls 1 cup","anal","anus","areole","arian","arrse","arse","arsehole","aryan","asanchez"," ass ","assbang","assbanged","asses","assfuck","assfucker","assfukka","asshole","assmunch","asswhole","autoerotic","ballsack","bastard","bdsm","beastial","beastiality","bellend","bestial","bestiality","bimbo","bimbos","bitch","bitches","bitchin","bitching","blowjob","blowjobs","blue waffle","bondage","boner","boob","boobs","booobs","boooobs","booooobs","booooooobs","booty call","breasts","brown shower","brown showers","buceta","bukake","bukkake","bullshit","busty","butthole","carpet muncher","cawk","chink","cipa","clit","clitoris","clits","cnut","cock","cockface","cockhead","cockmunch","cockmuncher","cocks","cocksuck","cocksucked","cocksucker","cocksucking","cocksucks","cokmuncher","coon","cowgirl","cowgirls","crap","crotch","cum","cuming","cummer","cumming","cums","cumshot","cunilingus","cunillingus","cunnilingus","cunt","cuntlicker","cuntlicking","cunts","damn","deepthroat","dick","dickhead","dildo","dildos","dink","dinks","dlck","dog style","dog-fucker","doggiestyle","doggin","dogging","doggystyle","dong","donkeyribber","doofus","doosh","dopey","douche","douchebag","douchebags","douchey","drunk","duche","dumass","dumbass","dumbasses","dummy","dyke","dykes","eatadick","eathairpie","ejaculate","ejaculated","ejaculates","ejaculating","ejaculatings","ejaculation","ejakulate","enlargement","erect","erection","erotic","erotism","essohbee","extacy","extasy","facial","fack","fag","fagg","fagged","fagging","faggit","faggitt","faggot","faggs","fagot","fagots","fags","faig","faigt","fanny","fannybandit","fannyflaps","fannyfucker","fanyy","fart","fartknocker","fatass","fcuk","fcuker","fcuking","feck","fecker","felch","felcher","felching","fellate","fellatio","feltch","feltcher","femdom","fingerfuck","fingerfucked","fingerfucker","fingerfuckers","fingerfucking","fingerfucks","fingering","fisted","fistfuck","fistfucked","fistfucker","fistfuckers","fistfucking","fistfuckings","fistfucks","fisting","fisty","flange","flogthelog","floozy","foad","fondle","foobar","fook","fooker","footjob","foreskin","freex","frigg","frigga","fubar","fuck","fucka","fuckass","fuckbitch","fucked","fucker","fuckers","fuckface","fuckhead","fuckheads","fuckhole","fuckin","fucking","fuckings","fuckingshitmotherfucker","fuckme","fuckmeat","fucknugget","fucknut","fuckoff","fuckpuppet","fucks","fucktard","fucktoy","fucktrophy","fuckup","fuckwad","fuckwhit","fuckwit","fuckyomama","fudgepacker","fuk","fuker","fukker","fukkin","fukking","fuks","fukwhit","fukwit","futanari","futanary","fux","fuxor","fxck","gae","gai","gangbang","gangbanged","gangbangs","ganja","gassyass","gay","gaylord","gays","gaysex","gey","gfy","ghay","ghey","gigolo","glans","goatse","god","godamn","godamnit","goddam","goddammit","goddamn","goddamned","gokkun","goldenshower","gonad","gonads","gook","gooks","gringo","gspot","gtfo","guido","hamflap","handjob","hardcoresex","hardon","hebe","heeb","hemp","hentai","heroin","herp","herpes","herpy","heshe","hitler","hiv","hoar","hoare","hobag","hoer","homey","homo","homoerotic","homoey","honky","hooch","hookah","hooker","hoor","hootch","hooter","hooters","hore","horniest","horny","hotsex","howtokill","howtomurdep","hump","humped","humping","hussy","hymen","inbred","incest","injun","jackass","jackhole","jackoff","jap","japs","jerk","jerked","jerkoff","jism","jiz","jizm","jizz","jizzed","junkie","junky","kawk","kike","kikes","kill","kinbaku","kinky","kinkyJesus","kkk","klan","knob","knobead","knobed","knobend","knobhead","knobjocky","knobjokey","kock","kondum","kondums","kooch","kooches","kootch","kraut","kum","kummer","kumming","kums","kunilingus","kwif","kyke","l3itch","labia","lech","len","leper","lesbians","lesbo","lesbos","lez","lezbian","lezbians","lezbo","lezbos","lezzie","lezzies","lezzy","lmao","lmfao","loin","loins","lube","lust","lusting","lusty","m-fucking","mafugly","mams","masochist","massa","masterb8","masterbate","masterbating","masterbation","masterbations","masturbate","masturbating","masturbation","maxi","menses","menstruate","menstruation","meth","milf","mofo","molest","moolie","moron","mothafuck","mothafucka","mothafuckas","mothafuckaz","mothafucked","mothafucker","mothafuckers","mothafuckin","mothafucking","mothafuckings","mothafucks","motherfuck","motherfucka","motherfucked","motherfucker","motherfuckers","motherfuckin","motherfucking","motherfuckings","motherfuckka","motherfucks","mtherfucker","mthrfucker","mthrfucking","muff","muffdiver","muffpuff","murder","mutha","muthafecker","muthafuckaz","muthafucker","muthafuckker","muther","mutherfucker","mutherfucking","muthrfucking","nad","nads","naked","napalm","nappy","nazi","nazism","needthedick","negro","nig","nigg","nigga","niggah","niggas","niggaz","nigger","niggers","niggle","niglet","nimrod","ninny","nipple","nipples","nob","nobhead","nobjocky","nobjokey","nooky","nude","nudes","numbnuts","nutbutter","nutsack","nympho","omg","opiate","opium","oral","orally","organ","orgasim","orgasims","orgasm","orgasmic","orgasms","orgies","orgy","ovary","ovum","ovums","paddy","paki","pantie","panties","panty","pastie","pasty","pawn","pcp","pecker","pedo","pedophile","pedophilia","pedophiliac","pee","peepee","penetrate","penetration","penial","penile","penis","penisfucker","perversion","peyote","phalli","phallic","phonesex","phuck","phuk","phuked","phuking","phukked","phukking","phuks","phuq","pigfucker","pillowbiter","pimp","pimpis","pinko","piss","pissed","pisser","pissers","pisses","pissflaps","pissin","pissing","pissoff","playboy","pms","polack","pollock","poon","poontang","poop","porn","porno","pornography","pornos","pot","potty","prick","pricks","prig","pron","prostitute","prude","pube","pubic","pubis","punkass","punky","puss","pusse","pussi","pussies","pussy","pussyfart","pussypalace","pussypounder","pussys","puto","queaf","queef","queer","queero","queers","quicky","quim","racy","rape","raped","raper","raping","rapist","raunch","rectal","rectum","rectus","reefer","reetard","reich","retard","retarded","revue","rimjaw","rimjob","rimming","ritard","rtard","rum","rump","rumprammer","ruski","sadism","sadist","sandbar","sausagequeen","scag","scantily","schizo","schlong","screw","screwed","screwing","scroat","scrog","scrot","scrote","scrotum","scrud","scum","seaman","seamen","seduce","semen","sex","sexual","shag","shagger","shaggin","shagging","shamedame","shemale","shibari","shibary","shit","shitdick","shite","shiteater","shited","shitey","shitface","shitfuck","shitfucker","shitfull","shithead","shithole","shithouse","shiting","shitings","shits","shitt","shitted","shitter","shitters","shitting","shittings","shitty","shiz","shota","sissy","skag","skank","slave","sleaze","sleazy","slut","slutbucket","slutdumper","slutkiss","sluts","smegma","smut","smutty","snatch","sniper","snuff","sob","sodom","son-of-a-bitch","souse","soused","spac","sperm","spic","spick","spik","spiks","spooge","spunk","steamy","stfu","stiffy","stoned","strip","strip club","stripclub","stroke","stupid","suck","sucked","sucking","sumofabiatch","tampon","tard","tawdry","teabagging","teat","teets","teez","terd","teste","testee","testes","testical","testicle","testis","threesome","throating","thrust","thug","tinkle","tit","titfuck","titi","tits","titt","tittiefucker","titties","titty","tittyfuck","tittyfucker","tittywank","titwank","toke","toots","tosser","tramp","transsexual","trashy","tubgirl","turd","tush","twat","twathead","twats","twatty","twunt","twunter","ugly","undies","unwed","urinal","urine","uterus","uzi","vag","vagina","valium","viagra","vigra","virgin","vixen","vodka","vomit","voyeur","vulgar","vulva","wad","wang","wank","wanker","wanky","wazoo","wedgie","weed","weenie","weewee","weiner","weirdo","wench","wetback","whitey","whiz","whoar","whoralicious","whore","whorealicious","whored","whoreface","whorehopper","whorehouse","whores","whoring","wigger","willies","willy","womb","woody","woose","wop","wtf","x-rated2g1c","xx","xxx","yaoi","yury","bich","b1ch","blch","b1tch","bltch","操你","几把","傻逼","拉屎","吃屎","吃翔","粑粑","粪","米田共","屎","💩","伞兵","操你妈","草你妈","屌你妈","吊你妈","卧槽","脑残","憨批","憨逼","憨憨","他妈","他娘","奶奶的","日你妈","狗日","智障","脑瘫","屌毛","吊毛","傻吊","傻der","傻屌","装逼","草泥马","特么的","撕逼","玛拉戈壁","爆菊","JB","呆逼","本屌","齐B短裙","法克","丢你老母","达菲鸡","打飞机","装13","逼格","蛋疼","绿茶婊","你妈的","表砸","屌爆了","买了个婊","妈了个逼","已撸","黄片","吉跋猫","妈蛋","逗比","鸡儿","我靠","碧莲","碧池","然并卵","日了狗","屁民","性癖","鸡巴","鸡吧","XX狗","操B","淫家","你妹","浮尸国","滚粗","弱智","傻批","狗逼","妈逼","信球","逼","脑子进水","p站","赌博","赌场","贩毒","毒贩","诅咒","做掉","死","杀","宰","砍","捅","涉黄","黄色网站","百家乐","约炮","少妇","自慰","手淫","淫","手冲","高潮","色情","情色","毒品","海洛因","吗啡","大麻","冰毒","鸦片","罂粟","可卡因","做爱","射精","中出","阴道","子宫","卵巢","卵子","精子","阴茎","睾丸","精囊","无码","裸体","裸照","裸","脱衣","脱光","色图","内内","爱水","涩图","性欲","调教","抖S","抖M","车震","卖淫","嫖娼","强奸","猥亵","爆乳","性服务","我去","我干","我淦","我操","我擦","妈的","淦","狗屁","大吊","大屌","奶子","奈子","野兽先辈","田所浩二","inm","银梦","会员制餐厅","我修院","德川","淳平","机霸","级霸","极霸","114514","nnd","mlgb","woc", "cnm", "dnm","rnm","wdnmd","shabi","玛德","我测","鸡爸","没鸡","没马","没🐎","没🐔","测你","策你","草你","曹你","王八蛋","逼养的","小逼崽子","牛子","巴子","虎哨","狗筐","傻篮子","你丫","操性","苛碜"];
+  var cusswords = BL.getBL();
 
   var nonoWordsDetectedCount = 0;
   var nonoWordsDetected = "";
@@ -572,15 +544,10 @@ function botChatCheck(chat, user) {
     }
   }
 
-  if(nonoWordsDetectedCount == 0) {
-    //console.log("no bad words were detected!")
-  } else {
-    //console.log("bad words were detected!")
-    //console.log("Count: " + String(nonoWordsDetectedCount))
-    //console.log("User: " + String(user))
-    //console.log("No No Words Found: " + nonoWordsDetected)
+  if(nonoWordsDetectedCount != 0) {
     warnUser(String(user))
   }
+
 }
 
 
@@ -596,8 +563,6 @@ function warnUser(user, isPublic) {
       var warningsBeforeCountValue = Number(warningDB.getRange(warningsCountRange).getValue());
       warningDB.getRange(warningsCountRange).setValue((warningsBeforeCountValue+1));
       var warningsAfterCountValue = Number(warningDB.getRange(warningsCountRange).getValue());
-      //console.log("Before: " + warningsBeforeCountValue)
-      //console.log("After: " + warningsAfterCountValue)
       if(isPublic == undefined) {
 
       } else {
@@ -610,8 +575,50 @@ function warnUser(user, isPublic) {
 }
 
 function filter(chat) {
-  var cusswords = ["2 girls 1 cup","anal","anus","areole","arian","arrse","arse","arsehole","aryan","asanchez","ass","assbang","assbanged","asses","assfuck","assfucker","assfukka","asshole","assmunch","asswhole","autoerotic","ballsack","bastard","bdsm","beastial","beastiality","bellend","bestial","bestiality","bimbo","bimbos","bitch","bitches","bitchin","bitching","blowjob","blowjobs","blue waffle","bondage","boner","boob","boobs","booobs","boooobs","booooobs","booooooobs","booty call","breasts","brown shower","brown showers","buceta","bukake","bukkake","bullshit","busty","butthole","carpet muncher","cawk","chink","cipa","clit","clitoris","clits","cnut","cock","cockface","cockhead","cockmunch","cockmuncher","cocks","cocksuck","cocksucked","cocksucker","cocksucking","cocksucks","cokmuncher","coon","cowgirl","cowgirls","crap","crotch","cum","cuming","cummer","cumming","cums","cumshot","cunilingus","cunillingus","cunnilingus","cunt","cuntlicker","cuntlicking","cunts","damn","deepthroat","dick","dickhead","dildo","dildos","dink","dinks","dlck","dog style","dog-fucker","doggiestyle","doggin","dogging","doggystyle","dong","donkeyribber","doofus","doosh","dopey","douche","douchebag","douchebags","douchey","drunk","duche","dumass","dumbass","dumbasses","dummy","dyke","dykes","eatadick","eathairpie","ejaculate","ejaculated","ejaculates","ejaculating","ejaculatings","ejaculation","ejakulate","enlargement","erect","erection","erotic","erotism","essohbee","extacy","extasy","facial","fack","fag","fagg","fagged","fagging","faggit","faggitt","faggot","faggs","fagot","fagots","fags","faig","faigt","fanny","fannybandit","fannyflaps","fannyfucker","fanyy","fart","fartknocker","fatass","fcuk","fcuker","fcuking","feck","fecker","felch","felcher","felching","fellate","fellatio","feltch","feltcher","femdom","fingerfuck","fingerfucked","fingerfucker","fingerfuckers","fingerfucking","fingerfucks","fingering","fisted","fistfuck","fistfucked","fistfucker","fistfuckers","fistfucking","fistfuckings","fistfucks","fisting","fisty","flange","flogthelog","floozy","foad","fondle","foobar","fook","fooker","footjob","foreskin","freex","frigg","frigga","fubar","fuck","fucka","fuckass","fuckbitch","fucked","fucker","fuckers","fuckface","fuckhead","fuckheads","fuckhole","fuckin","fucking","fuckings","fuckingshitmotherfucker","fuckme","fuckmeat","fucknugget","fucknut","fuckoff","fuckpuppet","fucks","fucktard","fucktoy","fucktrophy","fuckup","fuckwad","fuckwhit","fuckwit","fuckyomama","fudgepacker","fuk","fuker","fukker","fukkin","fukking","fuks","fukwhit","fukwit","futanari","futanary","fux","fuxor","fxck","gae","gai","gangbang","gangbanged","gangbangs","ganja","gassyass","gay","gaylord","gays","gaysex","gey","gfy","ghay","ghey","gigolo","glans","goatse","god","godamn","godamnit","goddam","goddammit","goddamn","goddamned","gokkun","goldenshower","gonad","gonads","gook","gooks","gringo","gspot","gtfo","guido","hamflap","handjob","hardcoresex","hardon","hebe","heeb","hemp","hentai","heroin","herp","herpes","herpy","heshe","hitler","hiv","hoar","hoare","hobag","hoer","homey","homo","homoerotic","homoey","honky","hooch","hookah","hooker","hoor","hootch","hooter","hooters","hore","horniest","horny","hotsex","howtokill","howtomurdep","hump","humped","humping","hussy","hymen","inbred","incest","injun","jackass","jackhole","jackoff","jap","japs","jerk","jerked","jerkoff","jism","jiz","jizm","jizz","jizzed","junkie","junky","kawk","kike","kikes","kill","kinbaku","kinky","kinkyJesus","kkk","klan","knob","knobead","knobed","knobend","knobhead","knobjocky","knobjokey","kock","kondum","kondums","kooch","kooches","kootch","kraut","kum","kummer","kumming","kums","kunilingus","kwif","kyke","l3itch","labia","lech","len","leper","lesbians","lesbo","lesbos","lez","lezbian","lezbians","lezbo","lezbos","lezzie","lezzies","lezzy","lmao","lmfao","loin","loins","lube","lust","lusting","lusty","m-fucking","mafugly","mams","masochist","massa","masterb8","masterbate","masterbating","masterbation","masterbations","masturbate","masturbating","masturbation","maxi","menses","menstruate","menstruation","meth","milf","mofo","molest","moolie","moron","mothafuck","mothafucka","mothafuckas","mothafuckaz","mothafucked","mothafucker","mothafuckers","mothafuckin","mothafucking","mothafuckings","mothafucks","motherfuck","motherfucka","motherfucked","motherfucker","motherfuckers","motherfuckin","motherfucking","motherfuckings","motherfuckka","motherfucks","mtherfucker","mthrfucker","mthrfucking","muff","muffdiver","muffpuff","murder","mutha","muthafecker","muthafuckaz","muthafucker","muthafuckker","muther","mutherfucker","mutherfucking","muthrfucking","nad","nads","naked","napalm","nappy","nazi","nazism","needthedick","negro","nig","nigg","nigga","niggah","niggas","niggaz","nigger","niggers","niggle","niglet","nimrod","ninny","nipple","nipples","nob","nobhead","nobjocky","nobjokey","nooky","nude","nudes","numbnuts","nutbutter","nutsack","nympho","omg","opiate","opium","oral","orally","organ","orgasim","orgasims","orgasm","orgasmic","orgasms","orgies","orgy","ovary","ovum","ovums","paddy","paki","pantie","panties","panty","pastie","pasty","pawn","pcp","pecker","pedo","pedophile","pedophilia","pedophiliac","pee","peepee","penetrate","penetration","penial","penile","penis","penisfucker","perversion","peyote","phalli","phallic","phonesex","phuck","phuk","phuked","phuking","phukked","phukking","phuks","phuq","pigfucker","pillowbiter","pimp","pimpis","pinko","piss","pissed","pisser","pissers","pisses","pissflaps","pissin","pissing","pissoff","playboy","pms","polack","pollock","poon","poontang","poop","porn","porno","pornography","pornos","pot","potty","prick","pricks","prig","pron","prostitute","prude","pube","pubic","pubis","punkass","punky","puss","pusse","pussi","pussies","pussy","pussyfart","pussypalace","pussypounder","pussys","puto","queaf","queef","queer","queero","queers","quicky","quim","racy","rape","raped","raper","raping","rapist","raunch","rectal","rectum","rectus","reefer","reetard","reich","retard","retarded","revue","rimjaw","rimjob","rimming","ritard","rtard","rum","rump","rumprammer","ruski","sadism","sadist","sandbar","sausagequeen","scag","scantily","schizo","schlong","screw","screwed","screwing","scroat","scrog","scrot","scrote","scrotum","scrud","scum","seaman","seamen","seduce","semen","sex","sexual","shag","shagger","shaggin","shagging","shamedame","shemale","shibari","shibary","shit","shitdick","shite","shiteater","shited","shitey","shitface","shitfuck","shitfucker","shitfull","shithead","shithole","shithouse","shiting","shitings","shits","shitt","shitted","shitter","shitters","shitting","shittings","shitty","shiz","shota","sissy","skag","skank","slave","sleaze","sleazy","slut","slutbucket","slutdumper","slutkiss","sluts","smegma","smut","smutty","snatch","sniper","snuff","sob","sodom","son-of-a-bitch","souse","soused","spac","sperm","spic","spick","spik","spiks","spooge","spunk","steamy","stfu","stiffy","stoned","strip","strip club","stripclub","stroke","stupid","suck","sucked","sucking","sumofabiatch","tampon","tard","tawdry","teabagging","teat","teets","teez","terd","teste","testee","testes","testical","testicle","testis","threesome","throating","thrust","thug","tinkle","tit","titfuck","titi","tits","titt","tittiefucker","titties","titty","tittyfuck","tittyfucker","tittywank","titwank","toke","toots","tosser","tramp","transsexual","trashy","tubgirl","turd","tush","twat","twathead","twats","twatty","twunt","twunter","ugly","undies","unwed","urinal","urine","uterus","uzi","vag","vagina","valium","viagra","vigra","virgin","vixen","vodka","vomit","voyeur","vulgar","vulva","wad","wang","wank","wanker","wanky","wazoo","wedgie","weed","weenie","weewee","weiner","weirdo","wench","wetback","whitey","whiz","whoar","whoralicious","whore","whorealicious","whored","whoreface","whorehopper","whorehouse","whores","whoring","wigger","willies","willy","womb","woody","woose","wop","wtf","x-rated2g1c","xx","xxx","yaoi","yury","bich","b1ch","blch","b1tch","bltch", "114514","nnd","mlgb","woc", "cnm", "dnm","rnm","wdnmd","shabi"];
+  var cusswords = BL.getBL();
+  
+  var nonoWordsDetectedCount = 0;
+  var nonoWordsDetected = "";
 
+  for(j=0; j < cusswords.length; j++) {
+    if(String(chat).includes(String(cusswords[j]))) {
+      nonoWordsDetectedCount++;
+      nonoWordsDetected = nonoWordsDetected + cusswords[j] + "|";
+    }
+  }
+
+  if(nonoWordsDetectedCount != 0) {
+    warnUser(String(user))
+  }
+
+}
+
+
+function warnUser(user, isPublic) {
+  // WARN USER
+  var warningDB = SpreadsheetApp.openById(userWarningDatabaseSpreadSheet);
+  var warnings = warningDB.getDataRange().getValues();
+  for(a=0; a < warnings.length; a++) {
+    var selectedUser = warnings[a][0];
+    var selectedUsersWarningsCount = warnings[a][0];
+    if(String(selectedUser) == String(user)) {
+      var warningsCountRange = "B" + String((a+1));
+      var warningsBeforeCountValue = Number(warningDB.getRange(warningsCountRange).getValue());
+      warningDB.getRange(warningsCountRange).setValue((warningsBeforeCountValue+1));
+      var warningsAfterCountValue = Number(warningDB.getRange(warningsCountRange).getValue());
+      if(isPublic == undefined) {
+
+      } else {
+        // is public
+        var botName = "<span style='color:#196EFF;'>B</span><span style='color:#6552B6;'>o</span><span style='color:#B2376D;'>t: </span>";
+        send(botName, "'" + String(user) + "' Was Warned!", "BOT");
+      }
+    }
+  }
+}
+
+function filter(chat) {
+  var cusswords = BL.getBL();
   var chat; // define the chat var which is the function parameter
 
   for(c=0; c < cusswords.length; c++) {
@@ -622,7 +629,6 @@ function filter(chat) {
     }
     chat = chat.replace(String(cusswords[c]), String(characters));
   }
-  //console.log(chat)
 
   return chat;
 }
@@ -633,14 +639,12 @@ function bc(chat, admin) {
       var ss = SpreadsheetApp.openById("1JoMMxw2kbyX22jKkO8Zp41ycWmOM3ftp7SldjH_4qpc");
       var chat = "(Admin) - " + String(chat);
       ss.appendRow([chat]);
-      //console.log("admin chat sent: " + chat)
     } else {
       var ss = SpreadsheetApp.openById("1JoMMxw2kbyX22jKkO8Zp41ycWmOM3ftp7SldjH_4qpc");
       ss.appendRow([chat]);
-      //console.log("sent: " + chat)
     }
   } catch(err) {
-    //console.log(err)
+
   }
 }
 
@@ -676,19 +680,10 @@ function getChats(user, roomNumber) {
     }
   }
 
-  //console.log(ss)
 
   if(ss == null) {
     return "Error! Chat Not Found.";
   }
-
-  var data = ss.getDataRange().getValues();
-  var datass = String(data).split(",");
-  //console.log("- every other line below me is a line of the chat -") 
-  for(e=0; e < datass.length; e++) {
-    //console.log(datass[e])
-  }
-  //console.log("----------------------------------------------------")
 
   if(user == "UpdateChat") {
 
@@ -780,7 +775,6 @@ function checkIfAccountWasCreated(username) {
   var datasplit = String(data).split(",");
   for(z=0; z < datasplit.length; z++) {
     if(datasplit[z] == username) {
-      //console.log("Account is in new acc db")
       return true;
     }
   }
@@ -794,7 +788,6 @@ function createAccount(username, password) {
   for(l=0; l < datass.length; l++) {
     usernameandpasswords = datass[l].split("|");
     if(username == usernameandpasswords[0]) {
-      //console.log("username is already in the db")
       var alreadyused = true;
     }
   }
@@ -802,7 +795,6 @@ function createAccount(username, password) {
     if(String(password).length  >= 8) {
       var ss = SpreadsheetApp.openById("1QFN75ulLnpN4Q8ZC95X1mp5NjpdcxYP6BXXgDegHM-4");
       username = gscleanusername(username);
-      //console.log("created account. username: " + username + " & password: " + password)
       var specialID = makeid(16);
       ss.appendRow([username + "|" + password + "|" + specialID + "|" + "New Chatter"]);
 
@@ -846,8 +838,8 @@ function gscleanusername(username) {
   username = username.replaceAll(":", "");
   // username = username.replaceAll("!", ""); using ! for commands for bot
   username = username.replaceAll("&", "");
-  username = username.replaceAll("_", " ");
-  username = username.replaceAll("-", " ");
+  username = username.replaceAll("_", " "); 
+  username = username.replaceAll("-", " "); 
   username = username.replaceAll("%", "");
   //username = username.replaceAll("*", ""); need this to show where bad words were said
   username = username.replaceAll("~", "");
@@ -856,22 +848,18 @@ function gscleanusername(username) {
   username = username.replaceAll("]", "");
   username = username.replaceAll("|", "");
   username = username.replaceAll("", "");
-  username = username.replaceAll(",", "");
+  //username = username.replaceAll(",", ""); 
   return username; 
 }
-
-
 
 function trylogin(username, password) {
   var ss = SpreadsheetApp.openById("1QFN75ulLnpN4Q8ZC95X1mp5NjpdcxYP6BXXgDegHM-4");
   var data = ss.getDataRange().getValues();
   var datass = String(data).split(",");
-  //console.log(datass)
   var accfound = false;
   var accCount = ss.getLastRow();
   for(m=0; m < accCount; m++) {
     selectedUser = datass[m].split("|");
-    //console.log(selectedUser)
     var selectedAccountsUsername = selectedUser[0];
     var selectedAccountsPassword = selectedUser[1];
     if(selectedAccountsUsername == username && selectedAccountsPassword == password) {
