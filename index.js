@@ -31,10 +31,16 @@ window.signout = function signout() {
 }
 
 window.searchChat = function searchChat() {
+  /*
   var searchTerm = document.getElementById("keyword").value;
   pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
     document.getElementById("chatSearchOutput").innerHTML = data;
   }).searchChatWithTerm(searchTerm);
+  */
+  var button = documenet.getElementById("chatSearchButton");
+  if(button != null) {
+      button.click();
+  }
 }
 
 window.showChatSearch = function showChatSearch() {
