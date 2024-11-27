@@ -115,7 +115,7 @@
     <!-- (buttons up top) --> 
 
     <div id="buttons" style=" display: inline-block; border-style: outset;">
-      <p style="display:inline" id="lastUsername"><b style='color: gray'>Signed In As: Guest Account </b></p><br>
+      <p style="display:inline" id="lastUsername"><b style='color: gray'>Guest Account </b></p><br>
       <button class="button" id="signup" onclick="showCreateAccount();"> Sign Up </button>
       <button class="button" id="signin" onclick="showLogin();"> Log In </button>
       <button class="button" id="showChatSearch" onclick="showChatSearch();"> Chat History Search </button>
@@ -132,8 +132,8 @@
       <br>
       <p id="isUserTaken" hidden></p>
       <p id="SID" hidden></p>
-      <h2 id="welcome"></h2>
-      Current Room: <p style="display: inline-block;" id="roomName">Room1</p>
+      <h3 id="welcome"></h3>
+      Current Room: <p style="display: inline-block;" id="roomName">Room One</p>
       <p id="currentViewCount"></p>
       <p id="chatOutdated"></p>
     </div>
@@ -267,16 +267,18 @@
 
     <script>
 
+    /*
     setInterval(function(){ 
       if(document.getElementById("second-main-container").hidden == false) {
         var roomInt = document.getElementById("roomName").innerHTML;
-        if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
-          alert("Error: INVALID ROOM NUMBER, Setting to Room1 (Main Chat)");
-          document.getElementById("roomName").innerHTML = "Room1";
+        if(roomInt != "Room One" && roomInt != "Room Two" && roomInt != "Room Three") {
+          alert("Error: INVALID ROOM NUMBER, Setting to Room One");
+          document.getElementById("roomName").innerHTML = "Room One";
           document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
         }
       }
     }, 5000);
+    */
     
     </script>
 
