@@ -4,13 +4,20 @@
 // ss/spreadsheet & db/database & acc/account
 // to make your own chat change these spreadsheet ids with your spreadsheet ids (looks like below and is found in ss url)
 
-const chatRoom1ID = "1JoMMxw2kbyX22jKkO8Zp41ycWmOM3ftp7SldjH_4qpc"; // you can name this spreadsheet room1
-const chatRoom2ID =  "1Ocv3vEfvi_Tp3pzqNJCH383YRLz22Ah0_yT_X7HUVq8"; // you can name this spreadsheet room2
-const chatRoom3ID = "1r67AZ39N1kNAWth6D4uvlF0TBfKmP03lvFf3mPu988k"; // you can name this spreadsheet room3
-const accountDatabaseSpreadSheet = "1QFN75ulLnpN4Q8ZC95X1mp5NjpdcxYP6BXXgDegHM-4"; // you can name this spreadsheet acc db or something less obvious
-const accountNameChangeDatabaseSpreadSheet = "1tiiL2ICBIGwcFKZpasOHLkWmbOAcB-Rt1LH_IKuBNto"; // you can name this acc name change db
+const chatRoom1ID = "1JoMMxw2kbyX22jKkO8Zp41ycWmOM3ftp7SldjH_4qpc";
+const chatRoom2ID =  "1Ocv3vEfvi_Tp3pzqNJCH383YRLz22Ah0_yT_X7HUVq8";
+const chatRoom3ID = "1r67AZ39N1kNAWth6D4uvlF0TBfKmP03lvFf3mPu988k"; 
 
-const externaljs = "https://raw.githubusercontent.com/Kaleb1583/gas-chat/main/index.js"; // change this to your own modified version of my js if you made your own and want to use it
+const accountDatabaseSpreadSheet = "1QFN75ulLnpN4Q8ZC95X1mp5NjpdcxYP6BXXgDegHM-4"; 
+const accountNameChangeDatabaseSpreadSheet = "1tiiL2ICBIGwcFKZpasOHLkWmbOAcB-Rt1LH_IKuBNto"; 
+const passwordChangeDatabaseSpreadSheet = "10MnBh6OSX_snC6T3feeSmtIjbI-v9jC1GOQ8CTBWbHo";
+const pointDatabaseSpreadSheet = "1DnXjv2Me0gcakI2wSIAThjXXWHkGH3p-hOQS73KhKVM";
+const userWarningDatabaseSpreadSheet = "1pdyzZf8NXuzrBkzag8T7uuxGRTdKYeBgz92tCEhiC44";
+const userSubmittedProblems = "1P-8kAq1-C8Lt4sdqfb5aqOCD9_l1jKzxkF9I_zGqlTY";
+
+const externaljs = "https://raw.githubusercontent.com/Kaleb1583/gas-chat/main/index.js"; 
+// change this to your own modified version of my js if you made your own and want to use it
+
 //-----
 
 
@@ -79,7 +86,7 @@ function changeUsernameRequest(oldUsername, newUsername) {
 
 
 function submitPasswordChangeRequest(username, password) {
-  var passwordRequestsDB = SpreadsheetApp.openById("10MnBh6OSX_snC6T3feeSmtIjbI-v9jC1GOQ8CTBWbHo");
+  var passwordRequestsDB = SpreadsheetApp.openById(passwordChangeDatabaseSpreadSheet);
   passwordRequestsDB.appendRow([username, password, String(false)]);
 }
 
@@ -134,7 +141,7 @@ function requestAccountDeletion(username) {
 
   //----
 
-  var pointDB = SpreadsheetApp.openById("1DnXjv2Me0gcakI2wSIAThjXXWHkGH3p-hOQS73KhKVM");
+  var pointDB = SpreadsheetApp.openById(pointDatabaseSpreadSheet);
   var data = pointDB.getDataRange().getValues();
 
   for(w=0; w < data.length; w++) {
@@ -157,7 +164,7 @@ function checkToAutoBan() {
     var selectedAccountData = String(accounts[d]).split("|");
     var user = selectedAccountData[0];
 
-    var warningDB = SpreadsheetApp.openById("1pdyzZf8NXuzrBkzag8T7uuxGRTdKYeBgz92tCEhiC44");
+    var warningDB = SpreadsheetApp.openById(userWarningDatabaseSpreadSheet);
     var warnings = warningDB.getDataRange().getValues();
     var warningCount = 0;
     for(s=0; s < warnings.length; s++) {
@@ -179,14 +186,14 @@ function checkToAutoBan() {
 }
 
 function addProblemSubmission(problemFound) {
-  var problemDB = SpreadsheetApp.openById("1P-8kAq1-C8Lt4sdqfb5aqOCD9_l1jKzxkF9I_zGqlTY");
+  var problemDB = SpreadsheetApp.openById(userWarningDatabaseSpreadSheet);
   if(String(problemDB).length >= 8) {
     problemDB.appendRow([problemFound]);
   }
 }
 
 function getProblemSubmissions() {
-  var problemDB = SpreadsheetApp.openById("1P-8kAq1-C8Lt4sdqfb5aqOCD9_l1jKzxkF9I_zGqlTY");
+  var problemDB = SpreadsheetApp.openById(userWarningDatabaseSpreadSheet);
   var problems = problemDB.getDataRange().getValues();
   var problemList = "";
   for(t=0; t < problems.length; t++) {
@@ -226,7 +233,8 @@ function getUsersRank(username) {
   }
 
   if(rank == "") {
-    rank = "No Rank";
+    //rank = "No Rank";
+    rank = "";
   }
 
   if(rank == "undefined" && username == "<b>Chat</b>") {
@@ -255,7 +263,7 @@ function isPasswordRight(username, password) {
 }
 
 function addAccountToPointDB(username) {
-  var pointDB = SpreadsheetApp.openById("1DnXjv2Me0gcakI2wSIAThjXXWHkGH3p-hOQS73KhKVM");
+  var pointDB = SpreadsheetApp.openById(pointDatabaseSpreadSheet);
   var zero = 0;
   pointDB.appendRow([username, zero]);
 }
@@ -263,12 +271,14 @@ function addAccountToPointDB(username) {
 
 function searchChatWithTerm(term) {
 
-  var ss = SpreadsheetApp.openById("1JoMMxw2kbyX22jKkO8Zp41ycWmOM3ftp7SldjH_4qpc");
-  var chats = ss.getDataRange().getValues();
   var accountsSentMessages = "";
 
+  var ss = SpreadsheetApp.openById(chatRoom1ID);
+  var chats = ss.getDataRange().getValues();
+  
+
   if(isUserTaken(term)) {
-    var pointDB = SpreadsheetApp.openById("1DnXjv2Me0gcakI2wSIAThjXXWHkGH3p-hOQS73KhKVM");
+    var pointDB = SpreadsheetApp.openById(pointDatabaseSpreadSheet);
     var usernameandpointsvalues = pointDB.getDataRange().getValues();
     for(i=0; i < usernameandpointsvalues.length; i++) {
       var username = usernameandpointsvalues[i][0];
@@ -297,7 +307,7 @@ function searchChatWithTerm(term) {
 
   var accountsSentMessages = accountsSentMessages + "<br>------------ no more chats left to see :( --------------------";
   
-  var warningDB = SpreadsheetApp.openById("1pdyzZf8NXuzrBkzag8T7uuxGRTdKYeBgz92tCEhiC44");
+  var warningDB = SpreadsheetApp.openById(userWarningDatabaseSpreadSheet);
   var warnings = warningDB.getDataRange().getValues();
   var warninglist = "";
   var warningCount = 0;
@@ -354,7 +364,7 @@ function isBanned(username) {
 }
 
 function getPointCount(username) {
-  var pointDB = SpreadsheetApp.openById("1DnXjv2Me0gcakI2wSIAThjXXWHkGH3p-hOQS73KhKVM");
+  var pointDB = SpreadsheetApp.openById(pointDatabaseSpreadSheet);
   var usernameandpointsvalues = pointDB.getDataRange().getValues();
   for(g=0; g < usernameandpointsvalues.length; g++) {
     var currentusername = usernameandpointsvalues[g][0];
@@ -367,7 +377,7 @@ function getPointCount(username) {
 }
 
 function giveOnePoint(username) {
-  var pointDB = SpreadsheetApp.openById("1DnXjv2Me0gcakI2wSIAThjXXWHkGH3p-hOQS73KhKVM");
+  var pointDB = SpreadsheetApp.openById(pointDatabaseSpreadSheet);
   var usernameandpointsvalues = pointDB.getDataRange().getValues();
   for(h=0; h < usernameandpointsvalues.length; h++) {
     if(usernameandpointsvalues[h][0] == String(username)) {
@@ -460,13 +470,13 @@ function send(user, chat, isCodeRunning, roomNumber) {
   //----
   if(user) {
     if(chat) {
-      if(roomNumber == "Room1") {
+      if(roomNumber == "Room One") {
         ss = SpreadsheetApp.openById(String(chatRoom1ID));
       } else {
-        if(roomNumber == "Room2") {
+        if(roomNumber == "Room Two") {
           ss = SpreadsheetApp.openById(String(chatRoom2ID));
         } else {
-          if(roomNumber == "Room3") {
+          if(roomNumber == "Room Three") {
             ss = SpreadsheetApp.openById(String(chatRoom3ID));
           }
         }
@@ -514,9 +524,9 @@ function send(user, chat, isCodeRunning, roomNumber) {
         
         if(ishackerwannabe) {
           if(user == "Guest") {
-            var chat = "A guest tried to use script tags 🤦";
+            //var chat = "A guest tried to use script tags 🤦";
           } else {
-            var chat = user + " tried to use script tags 🤦";
+            var chat = user + " tried to use script tags...";
             var bannedusersSS = SpreadsheetApp.openById("1f-MaaSr2QNtDhjDW6zZXO-XA0bFM5WibyFzWCHMkar8");
             bA(user);
           }
@@ -576,7 +586,7 @@ function botChatCheck(chat, user) {
 
 function warnUser(user, isPublic) {
   // WARN USER
-  var warningDB = SpreadsheetApp.openById("1pdyzZf8NXuzrBkzag8T7uuxGRTdKYeBgz92tCEhiC44");
+  var warningDB = SpreadsheetApp.openById(userWarningDatabaseSpreadSheet);
   var warnings = warningDB.getDataRange().getValues();
   for(a=0; a < warnings.length; a++) {
     var selectedUser = warnings[a][0];
@@ -600,7 +610,7 @@ function warnUser(user, isPublic) {
 }
 
 function filter(chat) {
-  var cusswords = ["2 girls 1 cup","anal","anus","areole","arian","arrse","arse","arsehole","aryan","asanchez","ass","assbang","assbanged","asses","assfuck","assfucker","assfukka","asshole","assmunch","asswhole","autoerotic","ballsack","bastard","bdsm","beastial","beastiality","bellend","bestial","bestiality","bimbo","bimbos","bitch","bitches","bitchin","bitching","blowjob","blowjobs","blue waffle","bondage","boner","boob","boobs","booobs","boooobs","booooobs","booooooobs","booty call","breasts","brown shower","brown showers","buceta","bukake","bukkake","bullshit","busty","butthole","carpet muncher","cawk","chink","cipa","clit","clitoris","clits","cnut","cock","cockface","cockhead","cockmunch","cockmuncher","cocks","cocksuck","cocksucked","cocksucker","cocksucking","cocksucks","cokmuncher","coon","cowgirl","cowgirls","crap","crotch","cum","cuming","cummer","cumming","cums","cumshot","cunilingus","cunillingus","cunnilingus","cunt","cuntlicker","cuntlicking","cunts","damn","deepthroat","dick","dickhead","dildo","dildos","dink","dinks","dlck","dog style","dog-fucker","doggiestyle","doggin","dogging","doggystyle","dong","donkeyribber","doofus","doosh","dopey","douche","douchebag","douchebags","douchey","drunk","duche","dumass","dumbass","dumbasses","dummy","dyke","dykes","eatadick","eathairpie","ejaculate","ejaculated","ejaculates","ejaculating","ejaculatings","ejaculation","ejakulate","enlargement","erect","erection","erotic","erotism","essohbee","extacy","extasy","facial","fack","fag","fagg","fagged","fagging","faggit","faggitt","faggot","faggs","fagot","fagots","fags","faig","faigt","fanny","fannybandit","fannyflaps","fannyfucker","fanyy","fart","fartknocker","fatass","fcuk","fcuker","fcuking","feck","fecker","felch","felcher","felching","fellate","fellatio","feltch","feltcher","femdom","fingerfuck","fingerfucked","fingerfucker","fingerfuckers","fingerfucking","fingerfucks","fingering","fisted","fistfuck","fistfucked","fistfucker","fistfuckers","fistfucking","fistfuckings","fistfucks","fisting","fisty","flange","flogthelog","floozy","foad","fondle","foobar","fook","fooker","footjob","foreskin","freex","frigg","frigga","fubar","fuck","fucka","fuckass","fuckbitch","fucked","fucker","fuckers","fuckface","fuckhead","fuckheads","fuckhole","fuckin","fucking","fuckings","fuckingshitmotherfucker","fuckme","fuckmeat","fucknugget","fucknut","fuckoff","fuckpuppet","fucks","fucktard","fucktoy","fucktrophy","fuckup","fuckwad","fuckwhit","fuckwit","fuckyomama","fudgepacker","fuk","fuker","fukker","fukkin","fukking","fuks","fukwhit","fukwit","futanari","futanary","fux","fuxor","fxck","gae","gai","gangbang","gangbanged","gangbangs","ganja","gassyass","gay","gaylord","gays","gaysex","gey","gfy","ghay","ghey","gigolo","glans","goatse","god","godamn","godamnit","goddam","goddammit","goddamn","goddamned","gokkun","goldenshower","gonad","gonads","gook","gooks","gringo","gspot","gtfo","guido","hamflap","handjob","hardcoresex","hardon","hebe","heeb","hemp","hentai","heroin","herp","herpes","herpy","heshe","hitler","hiv","hoar","hoare","hobag","hoer","homey","homo","homoerotic","homoey","honky","hooch","hookah","hooker","hoor","hootch","hooter","hooters","hore","horniest","horny","hotsex","howtokill","howtomurdep","hump","humped","humping","hussy","hymen","inbred","incest","injun","jackass","jackhole","jackoff","jap","japs","jerk","jerked","jerkoff","jism","jiz","jizm","jizz","jizzed","junkie","junky","kawk","kike","kikes","kill","kinbaku","kinky","kinkyJesus","kkk","klan","knob","knobead","knobed","knobend","knobhead","knobjocky","knobjokey","kock","kondum","kondums","kooch","kooches","kootch","kraut","kum","kummer","kumming","kums","kunilingus","kwif","kyke","l3itch","labia","lech","len","leper","lesbians","lesbo","lesbos","lez","lezbian","lezbians","lezbo","lezbos","lezzie","lezzies","lezzy","lmao","lmfao","loin","loins","lube","lust","lusting","lusty","m-fucking","mafugly","mams","masochist","massa","masterb8","masterbate","masterbating","masterbation","masterbations","masturbate","masturbating","masturbation","maxi","menses","menstruate","menstruation","meth","milf","mofo","molest","moolie","moron","mothafuck","mothafucka","mothafuckas","mothafuckaz","mothafucked","mothafucker","mothafuckers","mothafuckin","mothafucking","mothafuckings","mothafucks","motherfuck","motherfucka","motherfucked","motherfucker","motherfuckers","motherfuckin","motherfucking","motherfuckings","motherfuckka","motherfucks","mtherfucker","mthrfucker","mthrfucking","muff","muffdiver","muffpuff","murder","mutha","muthafecker","muthafuckaz","muthafucker","muthafuckker","muther","mutherfucker","mutherfucking","muthrfucking","nad","nads","naked","napalm","nappy","nazi","nazism","needthedick","negro","nig","nigg","nigga","niggah","niggas","niggaz","nigger","niggers","niggle","niglet","nimrod","ninny","nipple","nipples","nob","nobhead","nobjocky","nobjokey","nooky","nude","nudes","numbnuts","nutbutter","nutsack","nympho","omg","opiate","opium","oral","orally","organ","orgasim","orgasims","orgasm","orgasmic","orgasms","orgies","orgy","ovary","ovum","ovums","paddy","paki","pantie","panties","panty","pastie","pasty","pawn","pcp","pecker","pedo","pedophile","pedophilia","pedophiliac","pee","peepee","penetrate","penetration","penial","penile","penis","penisfucker","perversion","peyote","phalli","phallic","phonesex","phuck","phuk","phuked","phuking","phukked","phukking","phuks","phuq","pigfucker","pillowbiter","pimp","pimpis","pinko","piss","pissed","pisser","pissers","pisses","pissflaps","pissin","pissing","pissoff","playboy","pms","polack","pollock","poon","poontang","poop","porn","porno","pornography","pornos","pot","potty","prick","pricks","prig","pron","prostitute","prude","pube","pubic","pubis","punkass","punky","puss","pusse","pussi","pussies","pussy","pussyfart","pussypalace","pussypounder","pussys","puto","queaf","queef","queer","queero","queers","quicky","quim","racy","rape","raped","raper","raping","rapist","raunch","rectal","rectum","rectus","reefer","reetard","reich","retard","retarded","revue","rimjaw","rimjob","rimming","ritard","rtard","rum","rump","rumprammer","ruski","sadism","sadist","sandbar","sausagequeen","scag","scantily","schizo","schlong","screw","screwed","screwing","scroat","scrog","scrot","scrote","scrotum","scrud","scum","seaman","seamen","seduce","semen","sex","sexual","shag","shagger","shaggin","shagging","shamedame","shemale","shibari","shibary","shit","shitdick","shite","shiteater","shited","shitey","shitface","shitfuck","shitfucker","shitfull","shithead","shithole","shithouse","shiting","shitings","shits","shitt","shitted","shitter","shitters","shitting","shittings","shitty","shiz","shota","sissy","skag","skank","slave","sleaze","sleazy","slut","slutbucket","slutdumper","slutkiss","sluts","smegma","smut","smutty","snatch","sniper","snuff","sob","sodom","son-of-a-bitch","souse","soused","spac","sperm","spic","spick","spik","spiks","spooge","spunk","steamy","stfu","stiffy","stoned","strip","strip club","stripclub","stroke","stupid","suck","sucked","sucking","sumofabiatch","tampon","tard","tawdry","teabagging","teat","teets","teez","terd","teste","testee","testes","testical","testicle","testis","threesome","throating","thrust","thug","tinkle","tit","titfuck","titi","tits","titt","tittiefucker","titties","titty","tittyfuck","tittyfucker","tittywank","titwank","toke","toots","tosser","tramp","transsexual","trashy","tubgirl","turd","tush","twat","twathead","twats","twatty","twunt","twunter","ugly","undies","unwed","urinal","urine","uterus","uzi","vag","vagina","valium","viagra","vigra","virgin","vixen","vodka","vomit","voyeur","vulgar","vulva","wad","wang","wank","wanker","wanky","wazoo","wedgie","weed","weenie","weewee","weiner","weirdo","wench","wetback","whitey","whiz","whoar","whoralicious","whore","whorealicious","whored","whoreface","whorehopper","whorehouse","whores","whoring","wigger","willies","willy","womb","woody","woose","wop","wtf","x-rated2g1c","xx","xxx","yaoi","yury","bich","b1ch","blch","b1tch","bltch","操你","几把","傻逼","拉屎","吃屎","吃翔","粑粑","粪","米田共","屎","💩","伞兵","操你妈","草你妈","屌你妈","吊你妈","卧槽","脑残","憨批","憨逼","憨憨","他妈","他娘","奶奶的","日你妈","狗日","智障","脑瘫","屌毛","吊毛","傻吊","傻der","傻屌","装逼","草泥马","特么的","撕逼","玛拉戈壁","爆菊","JB","呆逼","本屌","齐B短裙","法克","丢你老母","达菲鸡","打飞机","装13","逼格","蛋疼","绿茶婊","你妈的","表砸","屌爆了","买了个婊","妈了个逼","已撸","黄片","吉跋猫","妈蛋","逗比","鸡儿","我靠","碧莲","碧池","然并卵","日了狗","屁民","性癖","鸡巴","鸡吧","XX狗","操B","淫家","你妹","浮尸国","滚粗","弱智","傻批","狗逼","妈逼","信球","逼","脑子进水","p站","赌博","赌场","贩毒","毒贩","诅咒","做掉","死","杀","宰","砍","捅","涉黄","黄色网站","百家乐","约炮","少妇","自慰","手淫","淫","手冲","高潮","色情","情色","毒品","海洛因","吗啡","大麻","冰毒","鸦片","罂粟","可卡因","做爱","射精","中出","阴道","子宫","卵巢","卵子","精子","阴茎","睾丸","精囊","无码","裸体","裸照","裸","脱衣","脱光","色图","内内","爱水","涩图","性欲","调教","抖S","抖M","车震","卖淫","嫖娼","强奸","猥亵","爆乳","性服务","我去","我干","我淦","我操","我擦","妈的","淦","狗屁","大吊","大屌","奶子","奈子","野兽先辈","田所浩二","inm","银梦","会员制餐厅","我修院","德川","淳平","机霸","级霸","极霸","114514","nnd","mlgb","woc", "cnm", "dnm","rnm","wdnmd","shabi","玛德","我测","鸡爸","没鸡","没马","没🐎","没🐔","测你","策你","草你","曹你","王八蛋","逼养的","小逼崽子","牛子","巴子","虎哨","狗筐","傻篮子","你丫","操性","苛碜"];
+  var cusswords = ["2 girls 1 cup","anal","anus","areole","arian","arrse","arse","arsehole","aryan","asanchez","ass","assbang","assbanged","asses","assfuck","assfucker","assfukka","asshole","assmunch","asswhole","autoerotic","ballsack","bastard","bdsm","beastial","beastiality","bellend","bestial","bestiality","bimbo","bimbos","bitch","bitches","bitchin","bitching","blowjob","blowjobs","blue waffle","bondage","boner","boob","boobs","booobs","boooobs","booooobs","booooooobs","booty call","breasts","brown shower","brown showers","buceta","bukake","bukkake","bullshit","busty","butthole","carpet muncher","cawk","chink","cipa","clit","clitoris","clits","cnut","cock","cockface","cockhead","cockmunch","cockmuncher","cocks","cocksuck","cocksucked","cocksucker","cocksucking","cocksucks","cokmuncher","coon","cowgirl","cowgirls","crap","crotch","cum","cuming","cummer","cumming","cums","cumshot","cunilingus","cunillingus","cunnilingus","cunt","cuntlicker","cuntlicking","cunts","damn","deepthroat","dick","dickhead","dildo","dildos","dink","dinks","dlck","dog style","dog-fucker","doggiestyle","doggin","dogging","doggystyle","dong","donkeyribber","doofus","doosh","dopey","douche","douchebag","douchebags","douchey","drunk","duche","dumass","dumbass","dumbasses","dummy","dyke","dykes","eatadick","eathairpie","ejaculate","ejaculated","ejaculates","ejaculating","ejaculatings","ejaculation","ejakulate","enlargement","erect","erection","erotic","erotism","essohbee","extacy","extasy","facial","fack","fag","fagg","fagged","fagging","faggit","faggitt","faggot","faggs","fagot","fagots","fags","faig","faigt","fanny","fannybandit","fannyflaps","fannyfucker","fanyy","fart","fartknocker","fatass","fcuk","fcuker","fcuking","feck","fecker","felch","felcher","felching","fellate","fellatio","feltch","feltcher","femdom","fingerfuck","fingerfucked","fingerfucker","fingerfuckers","fingerfucking","fingerfucks","fingering","fisted","fistfuck","fistfucked","fistfucker","fistfuckers","fistfucking","fistfuckings","fistfucks","fisting","fisty","flange","flogthelog","floozy","foad","fondle","foobar","fook","fooker","footjob","foreskin","freex","frigg","frigga","fubar","fuck","fucka","fuckass","fuckbitch","fucked","fucker","fuckers","fuckface","fuckhead","fuckheads","fuckhole","fuckin","fucking","fuckings","fuckingshitmotherfucker","fuckme","fuckmeat","fucknugget","fucknut","fuckoff","fuckpuppet","fucks","fucktard","fucktoy","fucktrophy","fuckup","fuckwad","fuckwhit","fuckwit","fuckyomama","fudgepacker","fuk","fuker","fukker","fukkin","fukking","fuks","fukwhit","fukwit","futanari","futanary","fux","fuxor","fxck","gae","gai","gangbang","gangbanged","gangbangs","ganja","gassyass","gay","gaylord","gays","gaysex","gey","gfy","ghay","ghey","gigolo","glans","goatse","god","godamn","godamnit","goddam","goddammit","goddamn","goddamned","gokkun","goldenshower","gonad","gonads","gook","gooks","gringo","gspot","gtfo","guido","hamflap","handjob","hardcoresex","hardon","hebe","heeb","hemp","hentai","heroin","herp","herpes","herpy","heshe","hitler","hiv","hoar","hoare","hobag","hoer","homey","homo","homoerotic","homoey","honky","hooch","hookah","hooker","hoor","hootch","hooter","hooters","hore","horniest","horny","hotsex","howtokill","howtomurdep","hump","humped","humping","hussy","hymen","inbred","incest","injun","jackass","jackhole","jackoff","jap","japs","jerk","jerked","jerkoff","jism","jiz","jizm","jizz","jizzed","junkie","junky","kawk","kike","kikes","kill","kinbaku","kinky","kinkyJesus","kkk","klan","knob","knobead","knobed","knobend","knobhead","knobjocky","knobjokey","kock","kondum","kondums","kooch","kooches","kootch","kraut","kum","kummer","kumming","kums","kunilingus","kwif","kyke","l3itch","labia","lech","len","leper","lesbians","lesbo","lesbos","lez","lezbian","lezbians","lezbo","lezbos","lezzie","lezzies","lezzy","lmao","lmfao","loin","loins","lube","lust","lusting","lusty","m-fucking","mafugly","mams","masochist","massa","masterb8","masterbate","masterbating","masterbation","masterbations","masturbate","masturbating","masturbation","maxi","menses","menstruate","menstruation","meth","milf","mofo","molest","moolie","moron","mothafuck","mothafucka","mothafuckas","mothafuckaz","mothafucked","mothafucker","mothafuckers","mothafuckin","mothafucking","mothafuckings","mothafucks","motherfuck","motherfucka","motherfucked","motherfucker","motherfuckers","motherfuckin","motherfucking","motherfuckings","motherfuckka","motherfucks","mtherfucker","mthrfucker","mthrfucking","muff","muffdiver","muffpuff","murder","mutha","muthafecker","muthafuckaz","muthafucker","muthafuckker","muther","mutherfucker","mutherfucking","muthrfucking","nad","nads","naked","napalm","nappy","nazi","nazism","needthedick","negro","nig","nigg","nigga","niggah","niggas","niggaz","nigger","niggers","niggle","niglet","nimrod","ninny","nipple","nipples","nob","nobhead","nobjocky","nobjokey","nooky","nude","nudes","numbnuts","nutbutter","nutsack","nympho","omg","opiate","opium","oral","orally","organ","orgasim","orgasims","orgasm","orgasmic","orgasms","orgies","orgy","ovary","ovum","ovums","paddy","paki","pantie","panties","panty","pastie","pasty","pawn","pcp","pecker","pedo","pedophile","pedophilia","pedophiliac","pee","peepee","penetrate","penetration","penial","penile","penis","penisfucker","perversion","peyote","phalli","phallic","phonesex","phuck","phuk","phuked","phuking","phukked","phukking","phuks","phuq","pigfucker","pillowbiter","pimp","pimpis","pinko","piss","pissed","pisser","pissers","pisses","pissflaps","pissin","pissing","pissoff","playboy","pms","polack","pollock","poon","poontang","poop","porn","porno","pornography","pornos","pot","potty","prick","pricks","prig","pron","prostitute","prude","pube","pubic","pubis","punkass","punky","puss","pusse","pussi","pussies","pussy","pussyfart","pussypalace","pussypounder","pussys","puto","queaf","queef","queer","queero","queers","quicky","quim","racy","rape","raped","raper","raping","rapist","raunch","rectal","rectum","rectus","reefer","reetard","reich","retard","retarded","revue","rimjaw","rimjob","rimming","ritard","rtard","rum","rump","rumprammer","ruski","sadism","sadist","sandbar","sausagequeen","scag","scantily","schizo","schlong","screw","screwed","screwing","scroat","scrog","scrot","scrote","scrotum","scrud","scum","seaman","seamen","seduce","semen","sex","sexual","shag","shagger","shaggin","shagging","shamedame","shemale","shibari","shibary","shit","shitdick","shite","shiteater","shited","shitey","shitface","shitfuck","shitfucker","shitfull","shithead","shithole","shithouse","shiting","shitings","shits","shitt","shitted","shitter","shitters","shitting","shittings","shitty","shiz","shota","sissy","skag","skank","slave","sleaze","sleazy","slut","slutbucket","slutdumper","slutkiss","sluts","smegma","smut","smutty","snatch","sniper","snuff","sob","sodom","son-of-a-bitch","souse","soused","spac","sperm","spic","spick","spik","spiks","spooge","spunk","steamy","stfu","stiffy","stoned","strip","strip club","stripclub","stroke","stupid","suck","sucked","sucking","sumofabiatch","tampon","tard","tawdry","teabagging","teat","teets","teez","terd","teste","testee","testes","testical","testicle","testis","threesome","throating","thrust","thug","tinkle","tit","titfuck","titi","tits","titt","tittiefucker","titties","titty","tittyfuck","tittyfucker","tittywank","titwank","toke","toots","tosser","tramp","transsexual","trashy","tubgirl","turd","tush","twat","twathead","twats","twatty","twunt","twunter","ugly","undies","unwed","urinal","urine","uterus","uzi","vag","vagina","valium","viagra","vigra","virgin","vixen","vodka","vomit","voyeur","vulgar","vulva","wad","wang","wank","wanker","wanky","wazoo","wedgie","weed","weenie","weewee","weiner","weirdo","wench","wetback","whitey","whiz","whoar","whoralicious","whore","whorealicious","whored","whoreface","whorehopper","whorehouse","whores","whoring","wigger","willies","willy","womb","woody","woose","wop","wtf","x-rated2g1c","xx","xxx","yaoi","yury","bich","b1ch","blch","b1tch","bltch", "114514","nnd","mlgb","woc", "cnm", "dnm","rnm","wdnmd","shabi"];
 
   var chat; // define the chat var which is the function parameter
 
@@ -646,25 +656,31 @@ function turnOffChat() {
 
 
 function getChats(user, roomNumber) {
-  //console.log(user)
-  //console.log(roomNumber)
+  // user is prob lastusername.innerHMTL
+  // roomNumber is prob roomname.innerHMTL
+
   var ss = "";
   
-  if(roomNumber == "Room1") {
+  if(roomNumber == "Room One") {
     ss = SpreadsheetApp.openById(String(chatRoom1ID));
   } else {
-    if(roomNumber == "Room2") {
+    if(roomNumber == "Room Two") {
       ss = SpreadsheetApp.openById(String(chatRoom2ID));
     } else {
-      if(roomNumber == "Room3") {
+      if(roomNumber == "Room Three") {
         ss = SpreadsheetApp.openById(String(chatRoom3ID));
       } else {
         data = "Get Chat Function Error: Chat Room Number Invalid!";
+        ss = null;
       }
     }
   }
 
   //console.log(ss)
+
+  if(ss == null) {
+    return "Error! Chat Not Found.";
+  }
 
   var data = ss.getDataRange().getValues();
   var datass = String(data).split(",");
