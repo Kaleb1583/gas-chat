@@ -231,7 +231,7 @@ window.showChatSearch = function showChatSearch() {
     pf2a1a3nhagx33a1wph264.script.run.send(String(username), String(chat), "", roomInt);
     if(doUpdate) {
 
-      if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
+      if(roomInt != "Room One" && roomInt != "Room One" && roomInt != "Room One") {
         alert("ERROR: INVALID ROOM NUMBER");
         document.getElementById("roomName").innerHTML = "Room One";
         document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
@@ -263,9 +263,9 @@ window.showChatSearch = function showChatSearch() {
   window.hasChatUpdated = function hasChatUpdated() {
     pf2a1a3nhagx33a1wph264.script.run.withSuccessHandler(function(data) {
       var roomInt = document.getElementById("roomName").innerHTML;
-      if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
+      if(roomInt != "Room One" && roomInt != "Room Two" && roomInt != "Room Three") {
         alert("ERROR: INVALID ROOM NUMBER");
-        document.getElementById("roomName").innerHTML = "Room1";
+        document.getElementById("roomName").innerHTML = "Room One";
         document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
       }
 
@@ -300,8 +300,8 @@ window.showChatSearch = function showChatSearch() {
     var selectedRoomNumber = document.getElementById("roomName").innerHTML;
 
     var roomInt = document.getElementById("roomName").innerHTML;
-    if(roomInt != "Room1" && roomInt != "Room2" && roomInt != "Room3") {
-      document.getElementById("roomName").innerHTML = "Room1";
+    if(roomInt != "Room One" && roomInt != "Room One" && roomInt != "Room One") {
+      document.getElementById("roomName").innerHTML = "Room One";
       document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
     }
 
