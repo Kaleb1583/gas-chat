@@ -187,15 +187,15 @@ window.showChatSearch = function showChatSearch() {
     document.getElementById("Room3A").innerText = "(3) Chat Room";
 
     if(roomInt == 1) {
-      document.getElementById("roomName").innerHTML = "Room1";
+      document.getElementById("roomName").innerHTML = "Room One";
       document.getElementById("Room1A").innerText = "1. Main Chat Room (This Room)";
     } else {
       if(roomInt == 2) {
-        document.getElementById("roomName").innerHTML = "Room2";
+        document.getElementById("roomName").innerHTML = "Room Two";
         document.getElementById("Room2A").innerText = "2. Chat Room (This Room)";
       } else {
         if(roomInt == 3) {
-          document.getElementById("roomName").innerHTML = "Room3";
+          document.getElementById("roomName").innerHTML = "Room Three";
           document.getElementById("Room3A").innerText = "3. Chat Room (This Room)";
         } 
       }
